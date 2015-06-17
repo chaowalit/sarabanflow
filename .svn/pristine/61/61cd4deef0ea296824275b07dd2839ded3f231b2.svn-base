@@ -1,0 +1,53 @@
+
+    $( document ).ready(function() {
+        $("#modal_createnumber1").validate({
+              rules: {
+                      instutition_number: "required",
+                      institution_send_number: "required",
+                      federal_register:"required",
+                  },
+
+                  messages: {
+                      instutition_number: "<p style = 'color:red;'>เลขทะเบียนต้องไม่ใช่ค่าว่าง</p>",
+                      institution_send_number: "<p style = 'color:red;'>เลขส่งทะเบียนหน่วยงานต้องไม่ใช่ค่าว่าง</p>",
+                      federal_register: "<p style = 'color:red;'>เลขส่งทะเบียนกลางต้องไม่ใช่ค่าว่าง</p>",
+                  },
+                   submitHandler: function(form) {
+                      if($("#federal_register").val() == "")
+                      {
+                          alert("ยังไม่ได้เลือกหน่วยงานทะเบียนกลาง");
+                      }
+                      else
+                      {
+                          $.post( "index.php/maindata/institution_create_number/update_number",
+                            {
+                             'instutition_number' :  $("#instutition_number").val(),
+                             'institution_send_number' :  $("#institution_send_number").val(),
+                             'details_of_number'  : $("#details_of_number").val(),
+                             'federal_register'   : $("#federal_register").val(),
+                             'hide2'              : $("#hide2").val(),
+                             'hide_id2'           : $("#hide_id2").val(),
+                             'number_recieve'     : $("#number_recieve").val(),
+                             'number_internal'    : $("#number_internal").val(),
+                             'number_external'    : $("#number_external").val(),
+                             'setup_instutition_number11111111' : $("#setup_instutition_number1").val(),
+                             'setup_instutition_number2' : $("#setup_instutition_number2").val(),
+                             'setup_instutition_number3' : $("#setup_institution_number3").val(),
+                             'hide1'   : $("#hide1").val()
+                              }
+                         , function( data ) {
+                           //alert(data);
+                           alert('อัพเดทเลขทะเบียนเรียบร้อยแล้ว');
+                           $('#myModal_provice').modal('hide');
+                           var province_id = $("#prov_id").val();
+                           $.post( "index.php/maindata/institution_create_number/getdata_from_province_institution",{'province_id' : province_id }, function( data ) {
+                             $("#content1").html( data );
+                          });
+                      });
+                      }
+                     
+                  }
+
+        });
+    });
+

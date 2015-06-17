@@ -1,0 +1,9 @@
+<hr/>
+<div style = "margin-left:15px; margin-right:15px">
+<div style = "width :100% ; background-color: #3e8f3e; padding-left :15px ;color:#FFFFFF"><h2><img src = "assets/img/Custom-Icon-Design-Pretty-Office-9-Email-send.ico" width = "40px">&nbsp;&nbsp;<b>พิมพ์รายงานสมุดทะเบียนรับ</b></h2></div>
+&nbsp;&nbsp;<a href = "index.php/report/book_receive" class = "btn btn-success btn-lg">สมุดทะเบียนรับ</a>&nbsp;&nbsp;<a href = "index.php/searchreport/searchreport/send_report" class = "btn btn-success btn-lg">สมุดทะเบียนส่ง</a>
+&nbsp;&nbsp;<a href = "index.php/searchreport/searchreport/send_report" class = "btn btn-success btn-lg">พิมพ์รายงานสถิติ</a>
+  <br/><br/>
+
+
+</div>

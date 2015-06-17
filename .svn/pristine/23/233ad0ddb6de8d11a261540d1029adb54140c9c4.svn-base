@@ -1,0 +1,77 @@
+<?php
+
+
+class sarabanflow_lib extends CI_Controller {
+    //put your code here
+    private $CI;
+    //--------------------------------
+    public $account_id;
+    public $username;
+    public $password;
+    
+    //-------------------------------
+    
+    public $controller;
+    public $method;
+    
+    function __construct($id = null)
+    {
+        parent::__construct($id);
+        $this->CI =& get_instance();
+        $this->CI->load->model('m_login');	
+        $this->__login();
+        
+        $this->getControllerAndMethod();
+        
+    }
+    
+    public function getControllerAndMethod(){
+        $this->controller = $this->router->class;
+        $this->method = $this->router->method;
+    }
+    
+    public function __login()
+    {
+        $data_login = $this->session->userdata('data_account');
+        if($data_login){
+            $this->account_id = $data_login['account_id'];
+            $this->username = $data_login['username'];
+            $this->password = $data_login['password'];
+            
+        }
+    }
+    public function __updateDataLogin(){
+        $result = $this->CI->m_login->getDataLogin($this->account_id);
+        if(!empty($result)){
+            $data_account = array();
+            foreach($result as $row){
+                $data_account = array(
+                    'account_id' => $row->id,
+                    'user_name' => $row->user_name,
+                    'password' => $row->password,
+                    'service_id' => $row->service_id,
+                    'position' => $row->position,
+                    'degree' => $row->degree,
+                    'working_group_id' => $row->working_group_id,
+                    'title_name_id' => $row->title_name_id,
+                    'full_name' => $row->full_name,
+                    'birthday' => $row->birthday,
+                    'domination_day' => $row->domination_day,
+                    'retirement_day' => $row->retirement_day,
+                    'telephone' => $row->telephone,
+                    'email' => $row->email,
+                    'image_account' => $row->image_account
+
+                );
+            }
+            $this->session->set_userdata('data_account',$data_account);
+            $this->__login();
+        }else{
+            $message = "No Data Profile Account Please contact the system administrator";
+            echo "<script type='text/javascript'>alert('$message');</script>";
+            $this->session->unset_userdata('data_account');
+            redirect('login','refresh');
+            exit;
+        }
+    }
+}

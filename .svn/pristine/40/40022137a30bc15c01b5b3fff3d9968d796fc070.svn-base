@@ -1,0 +1,10 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+require_once APPPATH.'libraries/nm_saraban_lib.php';
+class datdReciept extends nm_saraban_lib{
+    
+    public function index(){
+        $this->load->view('include/header');
+        $this->load->view('datdReciept/datdReciept');
+        $this->load->view('include/footer');
+    }
+}

@@ -1,0 +1,38 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+require_once APPPATH.'libraries/nm_saraban_lib.php';
+class bookCircular extends nm_saraban_lib{
+      function __construct() {
+        parent::__construct();
+        $this->load->model('m_booksend');
+    }
+    public function index(){
+        $data['result'] = $this->m_booksend->getAll_Circular();
+        $data['result_center'] = $this->m_booksend->getAll_Circular_center();
+        $data['type_data'] = "เวียน";
+        $this->load->view('include/header');
+        $this->load->view('bookSend/bookCircular',$data);
+        $this->load->view('include/footer');
+    }
+     public function search() {
+
+       $txt = $this->input->post('search');
+       $data['result'] = $this->m_booksend->getAll_Circular_search($txt);
+       $data['result_center'] = $this->m_booksend->getAll_Circular_center_search($txt);
+       $data['type_data'] = "เวียน";
+       $this->load->view('include/header');
+       $this->load->view('bookSend/bookCircular', $data);
+       $this->load->view('include/footer');
+    }
+    public function search_date()
+    {
+        $startdate = $this->input->post('startdate');
+        $enddate = $this->input->post('enddate');
+
+       $data['result'] = $this->m_booksend->getAll_Circular_search_date($startdate , $enddate);
+       $data['result_center'] = $this->m_booksend->getAll_Circular_center_search_date($startdate , $enddate);
+       $data['type_data'] = "เวียน";
+       $this->load->view('include/header');
+       $this->load->view('bookSend/bookCircular', $data);
+       $this->load->view('include/footer');
+    }
+}

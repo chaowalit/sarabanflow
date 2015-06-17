@@ -1,0 +1,36 @@
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+require_once APPPATH . 'libraries/nm_saraban_lib.php';
+
+class book_receive extends nm_saraban_lib {
+
+    public function index() {
+        $this->load->view('include/header');
+        $this->load->view('bookreceive/book_receive');
+        $this->load->view('include/footer');
+    }
+
+    public function bookReceive() {
+        $this->load->view('include/header');
+        $this->load->view('bookreceive/book_receive');
+        $this->load->view('include/footer');
+    }
+
+    public function bookSend() {
+        $this->load->view('include/header');
+        $this->load->view('bookreceive/book_send');
+        $this->load->view('include/footer');
+    }
+
+    public function printReport() {
+        $this->load->view('include/header');
+        $this->load->view('bookreceive/print_report');
+        $this->load->view('include/footer');
+    }
+
+}
+
+/* End of file welcome.php */
+/* Location: ./application/controllers/welcome.php */

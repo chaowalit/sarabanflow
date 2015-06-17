@@ -1,0 +1,161 @@
+<div class="container">
+    <div class="row">
+        <div class="form-group col-lg-12">
+            <div style = "width :100% ; background-color: #3e8f3e; padding-left :15px;color:#FFFFFF"><h3><img src = "assets/img/icon03.jpg" width = "40px">&nbsp;&nbsp;<b>ลงรับเอกสารจากระบบอื่น (จดหมาย,แฟกซ์,อีเมลล์,อื่นๆ)</b></h3></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-12 text-left">
+            <a href="index.php/welcome" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true">&nbsp;ย้อนกลับ</span></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-2 text-right">
+            <label>เอกสารที่<font color="red"> **</font></label>
+        </div>
+        <div class="form-group col-lg-4 ">
+            <input id="dataNo" name="dataNo" type="text" class="form-control"  placeholder="เอกสารที่">
+        </div>
+        <div class="form-group col-lg-2 text-right">
+            <label>ชั้นความเร็ว</label>
+        </div>
+        <div class="form-group col-lg-4">
+            <select id="layer_priority" class="form-control">
+                <option value="A">ปกติ</option>
+                <option value="B">ด่วน</option>
+                <option value="C">ด่วนมาก</option>
+                <option value="D">ด่วนที่สุด</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-2 text-right">
+            <label>ลงวันที่</label>
+        </div>
+        <div class="form-group col-lg-4">
+            <input type="date" class="form-control" id="settdate" name="settdate">
+        </div>
+        <div class="form-group col-lg-2 text-right">
+            <label>ชั้นความลับ</label>
+        </div>
+        <div class="form-group col-lg-4 text-right">
+            <select id="layer_secret" class="form-control">
+                <option value="A">ปกติ</option>
+                <option value="B">ลับ</option>
+                <option value="C">ลับมาก</option>
+                <option value="D">ลับที่สุด</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-2 text-right">
+            <label>จาก<font color="red"> **</font></label>
+        </div>
+        <div class="form-group col-lg-4">
+            <input id="from" name="from" type="text" class="form-control"  placeholder="จาก">
+        </div>
+        <div class="form-group col-lg-2 text-right">
+            <label>วัตถุประสงค์</label>
+        </div>
+        <div class="form-group col-lg-4">
+            <select class="form-control">
+                <option value="">เพื่อทราบ</option>
+                <option value="">เพื่อโปรดทราบ</option>
+                <option value="">เพื่อโปรดพิจารณา</option>
+                <option value="">เพื่อโปรดดำเนินการ</option>
+                <option value="">เพื่อโปรดทราบและดำเนินงานต่อไป</option>
+                <option value="">เพื่อโปรดพิจารณาอนุมติ</option>
+                <option value="">เพื่อโปรดพิจารณาลงนาม</option> 
+                <option value="">เพื่อโปรดพิจารณาอนุญาติ</option>
+                <option value="">เพื่อโปรดพิจารณาสั่งการ</option>
+                <option value="">เพื่อให้นำเสนอหรือแจ้งต่อไป</option>
+                <option value="">เพื่อถือปฎิบัติโดยทั่วกัน</option>
+                <option value="">เพื่อปรึกษาหารือ</option>
+                <option value="">เพื่อซักซ้อมความเข้าใจ</option>
+                <option value="">เพื่อชี้แจงข้อเท็จจริง</option>
+            </select>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-2 text-right">
+            <label>เรื่อง<font color="red"> **</font></label>
+        </div>
+        <div class="form-group col-lg-4">
+            <input id="subject" name="subject" type="text" class="form-control"  placeholder="เรื่อง">
+        </div>
+        <div class="form-group col-lg-2 text-right">
+            <label>วันที่ดำเนินการ</label>
+        </div>
+        <div class="form-group col-lg-4">
+            <input type="date" class="form-control" id="startdate" name="startdate">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-2 text-right">
+            <label>เรียน<font color="red"> **</font></label>
+        </div>
+        <div class="form-group col-lg-4">
+            <input id="username" name="username" type="text" class="form-control"  placeholder="เรียน">
+        </div>
+        <div class="form-group col-lg-2 text-right">
+            <label>เวลาที่ดำเนินการ</label>
+        </div>
+        <div class="form-group col-lg-4">
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker4'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-2 text-right">
+            <label>สิ่งที่ส่งมาด้วย</label>
+        </div>
+        <div class="form-group col-lg-4">
+            <input id="username" name="username" type="text" class="form-control"  placeholder="สิ่งที่ส่งมาด้วย">
+        </div>
+        <div class="form-group col-lg-2 text-right">
+            <label>ออกเลขทะเบียน/กำหนดเอง</label>
+        </div>
+        <div class="form-group col-lg-4">
+            <input id="username" name="username" type="text" class="form-control"  placeholder="ออกเลขทะเบียน/กำหนดเอง">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-2 text-right">
+            <label>อ้างถึง</label>
+        </div>
+        <div class="form-group col-lg-4 text-right">
+            <input id="username" name="username" type="text" class="form-control"  placeholder="อ้างถึง">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-2 text-right">
+            <label>เสนอ/ผู้ปฎิบัติ</label>
+        </div>
+        <div class="form-group col-lg-4">
+            <input id="username" name="username" type="text" class="form-control"  placeholder="เสนอ/ผู้ปฎิบัติ">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-2 text-right">
+            <label>รายละเอียด</label>
+        </div>
+        <div class="form-group col-lg-4">
+            <textarea class="form-control">รายละเอียด</textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-12 text-right">
+            <button class="btn btn-success"><span class="glyphicon glyphicon-share" aria-hidden="true">&nbsp;ออกเลขทะเบียน</span></button>
+            <button class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true">&nbsp;ยกเลิก</span></button>
+        </div>
+    </div>
+</div>
+
+

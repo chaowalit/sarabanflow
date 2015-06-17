@@ -1,0 +1,16 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+require_once APPPATH.'libraries/nm_saraban_lib.php';
+class recieptBook extends nm_saraban_lib{
+      function __construct() {
+        parent::__construct();
+        $this->load->model('m_booksend');
+    }
+    public function index(){
+
+        $data['recieve_doc'] = $this->m_booksend->getDataReceive_accept();
+        
+        $this->load->view('include/header');
+        $this->load->view('recieptBook/recieptBook_accept',$data);
+        $this->load->view('include/footer');
+    }
+}

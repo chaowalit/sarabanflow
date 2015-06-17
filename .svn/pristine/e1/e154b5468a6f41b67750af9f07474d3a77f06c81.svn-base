@@ -1,0 +1,104 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+require_once APPPATH.'libraries/nm_saraban_lib.php';
+class dataExport extends nm_saraban_lib{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('m_dataExport');
+        $this->load->model('m_auth_login');
+    }
+    
+    public function index(){
+        $data['department_of_instutition'] = $this->m_dataExport->get_data_department_of_instutition($this->province_id, $this->level_institution_id, $this->level_institution);
+        $this->load->view('dataExport/dataExport', $data);
+    }
+    
+    public function registration_create(){
+        $registration_number = $this->input->post('registration_number');
+        $layer_priority_id = $this->input->post('layer_priority_id');
+        $dated_send = $this->input->post('dated_send');
+        $layer_secret_id = $this->input->post('layer_secret_id');
+        $from_send = $this->input->post('from_send');
+        $objective_id = $this->input->post('objective_id');
+        $subject = $this->input->post('subject');
+        $implementation_date = $this->input->post('implementation_date');
+        $to_receive = $this->input->post('to_receive');
+        $implementation_time = $this->input->post('implementation_time');
+        $attach_detail = $this->input->post('attach_detail');
+        $custom_registration_number = trim($this->input->post('custom_registration_number'));
+        $reference_to = $this->input->post('reference_to');
+        $detail = $this->input->post('detail');
+        
+        
+        $data = array(
+            //"registration_create_number_of_run_id" => 1,
+            
+            "registration_type" => $this->input->post('registration_type'),
+            "dated_send" => date("Y-m-d" ,  strtotime($dated_send)),
+            "level_institution_id" => $this->level_institution_id,
+            "level_institution" => $this->level_institution,
+            "department_of_instutition_id" => $this->department_of_instutition_id,
+            "central_registration" => "no",
+            
+            "subject" => $subject,
+            "to_receive" => $to_receive,
+            "attach_detail" => $attach_detail,
+            "reference_to" => $reference_to,
+            "detail" => $detail,
+            "layer_priority_id" => $layer_priority_id,
+            "layer_secret_id" => $layer_secret_id,
+            "objective_id" => $objective_id,
+            "custom_registration_number" => ($custom_registration_number != "")? "Yes":"No",
+            "created" => date("Y-m-d H:i:s"),
+            "updated" => date("Y-m-d H:i:s")
+        );
+        
+        $registration_create_number_id = $this->m_dataExport->registration_create($data);
+        
+        $this->made_number_of_run_registration($registration_create_number_id, "no");
+        
+        
+        //$this->report_detail_registration_create($registration_create_number_id);
+        redirect('dataExport/dataExport/report_detail_registration_create/'.base64_encode($registration_create_number_id), 'refresh');
+    }
+    
+    public function made_number_of_run_registration($registration_create_number_id, $central_registration){
+        if($central_registration == "no"){
+            $number_of_run = $this->m_dataExport->check_registration_create_number_of_run($this->level_institution_id, $this->level_institution);
+            $registration_create_number_of_run_id = $this->m_dataExport->save_registration_create_number_of_run($registration_create_number_id, $this->level_institution_id, $this->level_institution, ($number_of_run[0]['number_of_run']+1));
+            $this->m_dataExport->update_registration_create($registration_create_number_id, $registration_create_number_of_run_id);
+        }else if($central_registration == "yes"){
+            echo "error";
+            exit;
+        }
+        
+    }
+    
+    public function report_detail_registration_create($registration_create_number_id){
+        $data['registration_create_number_id'] = base64_decode($registration_create_number_id);
+        $data['registration_create_number'] = $this->m_dataExport->report_detail_registration_create(base64_decode($registration_create_number_id));
+        $data['number_of_run'] = $this->m_dataExport->get_number_of_run(base64_decode($registration_create_number_id));
+        
+        $this->load->view('dataExport/report_detail_registration_create', $data);
+    }
+    public function registration_create_upload_file(){
+        $registration_create_number_id = $this->input->post('registration_create_number_id');
+        if (!empty($_FILES['images']['name'][0])) {
+            $array_file = upload_files($_FILES['images'], './uploads/registration_create_file');
+            foreach($array_file as $val){
+                $data = array(
+                    "registration_create_number_id" => $registration_create_number_id,
+                    "file_upload_name" => $val,
+                    "created" => date("Y-m-d H:i:s"),
+                    "updated" => date("Y-m-d H:i:s")
+                );
+                $this->m_dataExport->registration_create_upload_file($data);
+            }
+        }
+        $this->session->set_flashdata('array_file_result', $array_file);
+        redirect('dataExport/dataExport/report_detail_registration_create/'.base64_encode($registration_create_number_id), 'refresh');
+    }
+    
+    
+}
+

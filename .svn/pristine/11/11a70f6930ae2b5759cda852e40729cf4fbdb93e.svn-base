@@ -1,0 +1,44 @@
+<div style = "margin-left:15px; margin-right:15px">
+    <div style = "width :100% ; background-color: #3e8f3e; padding-left :15px ;color:#FFFFFF"><h2><img src = "assets/img/Custom-Icon-Design-Pretty-Office-9-Email-send.ico" width = "40px">&nbsp;&nbsp;<b>ผลการพิมพ์รายงานสมุดทะเบียนส่ง</b></h2></div>
+    <a href="index.php/report/book_receive/bookSend" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left " aria-hidden="true">&nbsp;ย้อนกลับ</span></a>
+    <a href="index.php/report/book_receive/toDocSend" class="btn btn-primary">ยืนยันการพิมพ์</a>
+    <br/><br/>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="panel-body form-horizontal payment-form">
+            <div class="form-group">
+                <div class="form-group">
+                    <label class="col-sm-2 "><h4>หน่วยงาน :</h4></label>
+                    <label class="col-sm-4 text-left"><h4><?php echo $this->institution_name; ?></h4></label>
+                    <label class="col-sm-1 "><h4>วันที :</h4></label>
+                    <label class="col-sm-2 text-left"><h4><?php echo date('d/m/y'); ?></h4></label>
+                    <label class="col-sm-1 "><h4>เวลา :</h4></label>
+                    <label class="col-sm-2 text-left"><h4><?php echo date('H:i:s'); ?></h4></label>
+                </div> 
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table id="mytable" class="table table-bordred table-striped">
+                    <thead>
+                    <th>ลำดับ</th>
+                    <th>เลขทะเบียน</th>
+                    <th>เอกสารเลขที่</th>
+                    <th>วันที่</th>
+                    <th>จาก</th>
+                    <th>เรียน</th>
+                    <th>เรื่อง</th>
+                    <th>การปฎิบัติ</th>
+                    </thead>
+                    <tbody>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

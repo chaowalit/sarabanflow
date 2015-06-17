@@ -1,0 +1,98 @@
+<?php
+
+class m_printreport extends CI_Model {
+
+    function __construct() {
+        
+    }
+    public function alldata() {
+        $sql = "select * from registration_create_number";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function getDataFormPrintReportBookSend($year ="",$from_number_of_run ="",$to_number_of_run ="",$department_id ="",$startDate = "",$endDate ="",$form_send ="",$subject ="",$to_receive=""){
+        $srtWhere = "";
+        
+        //เลขทะเบียน
+       if ($from_number_of_run != "" && $to_number_of_run != ""){
+            $srtWhere = $srtWhere." rcnr.number_of_run between $from_number_of_run and $to_number_of_run";
+        }else if ($from_number_of_run == "" && $to_number_of_run != ""){
+            $srtWhere = $srtWhere." rcnr.number_of_run <= $to_number_of_run";
+        }else if ($from_number_of_run != "" && $to_number_of_run == ""){
+            $srtWhere = $srtWhere." rcnr.number_of_run = $from_number_of_run ";
+        }
+        
+        //วันที่
+        if ($startDate != "" && $endDate != ""){
+            if ($srtWhere != ""){$srtWhere = $srtWhere." and ";}
+            $srtWhere = $srtWhere." rcn.dated_send between '".$startDate."' and '".$endDate."'";
+        }else if ($startDate == "" && $endDate != ""){
+            if ($srtWhere != ""){$srtWhere = $srtWhere." and ";}
+            $srtWhere = $srtWhere." rcn.dated_send <= '".$endDate."'";
+             
+        }else if ($startDate != "" && $endDate == ""){
+            if ($srtWhere != ""){$srtWhere = $srtWhere." and ";}
+            $srtWhere = $srtWhere." rcn.dated_send = '".$startDate."'";
+           
+        }
+       
+        //เรื่อง
+        if ($subject != ""){
+            if ($srtWhere != ""){$srtWhere = $srtWhere." and ";}
+            $srtWhere = $srtWhere."  rcn.subject like '%".$subject."%'";
+        }
+        //เรียน
+        if ($to_receive != ""){
+            if ($srtWhere != ""){$srtWhere = $srtWhere." and ";}
+            $srtWhere = $srtWhere."  rcn.to_receive like '%".$to_receive."%'";
+        }
+        $sql = " select rcnr.number_of_run as number_of_run "
+             . "       ,DATE_FORMAT(DATE_ADD(rcn.dated_send, INTERVAL 543  YEAR),'%d/%m/%Y')     as dated_send    "
+             . "       ,rcn.subject        as subject       "
+             . "       ,rcn.to_receive     as to_receive    "
+             . "       ,rcn.department_of_instutition_id as department_of_instutition_id "
+             . "       ,rcn.registration_type as registration_type "
+             . " from  registration_create_number_of_run rcnr "
+             . " inner join registration_create_number rcn on rcnr.registration_create_number_id = rcn.id "
+             . "            and rcnr.id = rcn.registration_create_number_of_run_id "
+             . " where ".$srtWhere;
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+        
+    }
+
+    public  function getDataForPrintReport($level_institution_id = "",$level_institution = "", $startDate = "",$endDate = ""){
+        $strWhere = "";
+        if ($level_institution_id != ""){
+            $strWhere = $strWhere." rcnr.level_institution_id = '".$level_institution_id."'";
+        }
+        if ($level_institution != ""){
+            if ($strWhere != ""){$strWhere = $strWhere." and ";}
+            $strWhere = $strWhere." rcnr.level_institution = '".$level_institution."'";
+        }
+        if ($startDate != "" && $endDate != ""){
+            if ($strWhere != ""){$strWhere = $strWhere." and ";}
+            $strWhere = $strWhere." rcn.dated_send between '".$startDate."' and '".$endDate."'";
+        }else if ($startDate == "" && $endDate != ""){
+            if ($strWhere != ""){$strWhere = $strWhere." and ";}
+            $strWhere = $strWhere." rcn.dated_send <= '".$endDate."'";
+        }else if ($startDate != "" && $endDate == ""){
+            if ($strWhere != ""){$strWhere = $strWhere." and ";}
+            $strWhere = $strWhere." rcn.dated_send = '".$startDate."'";
+        }
+        $sql = " select count(rcnr.id) as count_row "
+              ." from registration_create_number_of_run rcnr "
+              ." inner join registration_create_number rcn on rcnr.registration_create_number_id = rcn.id "
+              ." and rcnr.id = rcn.registration_create_number_of_run_id "
+              ." where ".$strWhere;
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+
+      }
+
+}
+
+?>

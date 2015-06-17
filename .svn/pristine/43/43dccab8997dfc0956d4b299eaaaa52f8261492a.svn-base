@@ -1,0 +1,50 @@
+<div style = "margin-left:15px; margin-right:15px">
+    <div style = "width :100% ; background-color: #3e8f3e; padding-left :15px ;color:#FFFFFF"><h2><img src = "assets/img/Custom-Icon-Design-Pretty-Office-9-Email-send.ico" width = "40px">&nbsp;&nbsp;<b>พิมพ์รายงานสถิติ</b></h2></div>
+    <a href="index.php/report/book_receive/printReport" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left " aria-hidden="true">&nbsp;ย้อนกลับ</span></a>
+    <a href="index.php/report/book_receive/toDocReport/" class="btn btn-primary">ยืนยันการพิมพ์</a>
+    <br/><br/>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="panel-body form-horizontal payment-form">
+            <div class="form-group">
+                <div class="form-group">
+                    <label class="col-sm-3 "><h4>สถิติการออกเลขทะเบียน จากวันที่ :</h4></label>
+                    <label class="col-sm-2 text-left"><font color="red"><h4><?php echo $newStartDate;?></h4></font></label>
+                    <label class="col-sm-1 "><h4>ถึงวันที่ :</h4></label>
+                    <label class="col-sm-2 text-left"><font color="red"><h4><?php echo $newEndDate;?></h4></font></label>
+                    
+                </div> 
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table id="mytable" class="table table-bordred table-striped">
+                    <thead>
+                        <th class="text-center">ลำดับ</th>
+                        <th class="text-center">ชื่อผู้ใช้งานในหน่วยงาน</th>
+                        <th class="text-center">สถิติการลงรับเอกสาร</th>
+                        <th class="text-center">สถิติการออกเลขส่งภายนอก</th>
+                    </thead>
+                    <tbody>
+                        <?php 
+                            $count = 0;
+                            foreach ($result as $row){
+                            $count++;
+                       ?>
+                        <tr>
+                            <td class="text-center"><?php echo $count;?></td>
+                            <td class="text-center"><?php echo $this->institution_name;?></td>
+                            <td class="text-center"><?php echo $count;?></td>
+                            <td class="text-center"><?php echo $row['count_row'];?></td>
+                        </tr>
+                        
+                      <?php }?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

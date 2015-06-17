@@ -1,0 +1,6 @@
+<?php
+
+class m_receive_document_orther extends CI_Model{
+    //put your code here
+    
+}

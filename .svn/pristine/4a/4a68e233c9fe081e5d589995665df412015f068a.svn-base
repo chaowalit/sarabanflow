@@ -1,0 +1,24 @@
+<?php
+
+class m_sending extends CI_Model{
+    //put your code here
+    public function getdata($id_redirect = '', $select_ins = '')
+    {   
+        if($select_ins == 1)
+        {
+            $level = 'institution_province';
+        }
+         if($select_ins == 2)
+        {
+            $level = 'institution_amphur';
+        }
+         if($select_ins == 3)
+        {
+            $level = 'institution_district';
+        }
+        $sql = "select * from $level  where province_id = $id_redirect";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+}

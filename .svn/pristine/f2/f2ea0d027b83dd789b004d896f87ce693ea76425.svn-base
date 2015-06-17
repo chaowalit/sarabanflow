@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <?php
+        header("Content-Type: application/vnd.ms-word");
+        header("Expires: 0");
+        header("Cache-Control:  must-revalidate, post-check=0, pre-check=0");
+        header("Content-disposition: attachment; filename=\"bookSend.doc\"");
+        ?>
+        <br><br>
+    <center><h2>รายงานสมุดทะเบียนส่ง</h2></center>
+    <left><label><h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;หน่วยงาน :   &nbsp;&nbsp;&nbsp;<?php echo $this->institution_name; ?></h3></label></left>
+    <left><label>
+            <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;วันที่ :   &nbsp;&nbsp;&nbsp;
+                <?php
+                $newDate = date("d/m/Y", strtotime(date('y-m-d')));
+                echo $newDate;
+                ?>
+
+
+            </h3></label></left>
+
+    <hr width="100%">
+    <center><br><br>
+        <table border="1" width="90%" class="table table-bordred table-striped">
+            <thead>
+            <th><h2>ลำดับ</h2></th>
+            <th><h2>เลขทะเบียน</h2></th>
+            <th><h2>เอกสารเลขที่</h2></th>
+            <th><h2>วันที่</h2></th>
+            <th><h2>เรื่อง</h2></th>
+            <th><h2>เรียน</h2></th>
+            <th><h2>ลงชื่อ รับวันที่</h2></th>
+
+            </thead>
+
+            <?php
+            $count = 0;
+            foreach ($result as $row) {
+                $count++;
+                ?>
+                <tr>
+                    <td align="center"><?php echo $count; ?></td>
+                    <td align="center"><?php echo $row['number_of_run']; ?></td>
+                    <td align="center">
+                        <?php
+                            $this->db->select('*');
+                            $this->db->from('department_of_instutition');
+                            $this->db->where('id', $row['department_of_instutition_id']);
+                            $this->db->where('active', 1);
+                            $query = $this->db->get();
+                            $result2 = $query->result_array();
+                            echo $this->instutition_number . '.' . $result2[0]['department_id'] . '/' . $row['registration_type'] . $row['number_of_run'];
+                        ?>
+                    </td>
+                    <td align="center"><?php echo $row['dated_send']; ?></td>
+                    <td align="center"><?php echo $row['subject']; ?></td>
+                    <td align="center"><?php echo $row['to_receive']; ?></td>
+                    <td></td>
+
+                </tr>
+            <?php } ?>
+        </table>
+    </center>
+</body>
+</html>

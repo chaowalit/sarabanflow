@@ -1,0 +1,40 @@
+<?php
+
+
+class m_normal_system extends CI_Model{
+    //put your code here
+    function getDataProvinceAll(){
+        $this->db->select('*');
+        $this->db->from('province');
+        $this->db->order_by('province_name','asc');
+        $result = $this->db->get();
+        return $result->result();
+    }
+    function getDataInstitutionProvince($province_id){
+        $this->db->select('*');
+        $this->db->from('institution_province');
+        $this->db->where('province_id',$province_id);
+        $this->db->order_by('institution_province_name','asc');
+        $result = $this->db->get();
+        return $result->result();
+    }
+    function getDataInstitutionAmphur($province_id, $institution_province_id){
+        $this->db->select('*');
+        $this->db->from('institution_amphur');
+        $this->db->where('province_id',$province_id);
+        $this->db->where('institution_province_id',$institution_province_id);
+        $this->db->order_by('institution_amphur_name','asc');
+        $result = $this->db->get();
+        return $result->result();
+    }
+    function getDataInstitutionDistrict($province_id, $institution_province_id, $institution_amphur_id){
+        $this->db->select('*');
+        $this->db->from('institution_district');
+        $this->db->where('province_id',$province_id);
+        $this->db->where('institution_province_id',$institution_province_id);
+        $this->db->where('institution_amphur_id',$institution_amphur_id);
+        $this->db->order_by('institution_district_name','asc');
+        $result = $this->db->get();
+        return $result->result();
+    }
+}

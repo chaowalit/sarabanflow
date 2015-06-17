@@ -1,0 +1,88 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+require_once APPPATH.'libraries/nm_saraban_lib.php';
+class acceptBook extends nm_saraban_lib{
+      function __construct() {
+        parent::__construct();
+        $this->load->model('m_acceptbook');
+        $this->load->model('m_booksend');
+    }
+    public function index(){
+
+    }
+    public function get_content($id = '' , $id_create = '')
+    {  
+       $data['result'] = $this->m_booksend->getDetail($id_create);
+       $data['id_accept'] = $id;
+       $data['id_create'] = $id_create;
+       $data['result'] = $this->m_booksend->get_content($id);
+       $this->load->view('acceptBook/sup/content_doc',$data);
+    }
+    public function show_detail($id = '' ,$id_create = '')
+    {
+        $data['result'] = $this->m_booksend->getDetail($id_create);
+        $data['id_accept'] = $id;
+        $data['id_create'] = $id_create;
+        $this->load->view('include/header');
+        $this->load->view('acceptBook/acceptBook',$data);;
+        $this->load->view('include/footer');
+    }
+    public function accept_return_document()
+    {
+        $id_accept   =  $this->input->post('id_accept');
+        $id_create   =  $this->input->post('id_create');
+        $messages   =  $this->input->post('messages');
+
+        $this->db->set('status_return_document','yes');
+        $this->db->set('reason_return_document',$messages);
+        $this->db->where('id',$id_accept);
+        $this->db->update('registration_send_document_outside');
+
+        $this->session->set_flashdata('insert_send2', 'Value');  
+        redirect('receiveDocumentOnline/receiveDocumentOnline','refresh');
+    }
+    public function return_document($id = '' ,$id_create = '')
+    {
+        $data['result'] = $this->m_booksend->getDetail($id_create);
+        $data['id_accept'] = $id;
+        $data['id_create'] = $id_create;
+        $this->load->view('include/header');
+        $this->load->view('acceptBook/return_document',$data);;
+        $this->load->view('include/footer');
+    }
+    public function acceptBookkeep_document($id = '' , $id_create = '')
+    {  
+        $data['result'] = $this->m_booksend->getDetail($id_create);
+        $data['id_accept'] = $id;
+        $data['id_create'] = $id_create;
+
+        $this->db->set('status_reading','yes');
+        $this->db->where('id',$id);
+        $this->db->update('registration_send_document_outside');
+
+        $this->load->view('include/header');
+        $this->load->view('acceptBook/acceptBook',$data);;
+        $this->load->view('include/footer');
+    }
+    public function save_data_accepted($id_accept = '' ,$id_create = '')
+    {   
+        $sender_data = $this->m_booksend->get_sender($id_create);
+
+        $this->db->set('instutition_receiver_id',$this->level_institution_id);
+        $this->db->set('instutition_receiver_level',$this->level_institution);
+        $this->db->set('instutition_sender_id',$sender_data[0]['level_institution_id']);
+        $this->db->set('instutition_sender_level',$sender_data[0]['level_institution']);
+        $this->db->set('registration_document_outside_id',$id_accept);
+        $this->db->set('registration_create_number_id',$id_create);
+        $this->db->insert('registration_receive_document');
+
+        //update status receive
+        $this->db->set('status_receive','yes');
+        $this->db->where('id', $id_accept);
+        $this->db->update('registration_send_document_outside'); 
+        
+        $this->session->set_flashdata('insert_send1', 'Value');
+        
+        redirect('receiveDocumentOnline/receiveDocumentOnline','refresh');
+
+    }
+}

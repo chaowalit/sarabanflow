@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/wamp/www/sarabanflow/application/controllers/recieptBook/recieptBook.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/application/controllers/detailReceiveOutsite/detailReceiveOutsite.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/application/models/m_booksend.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/application/views/recieptBook/recieptBook_accept.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/application/views/detailReceiveOutsite/detailReceiveOutsite.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/application/views/welcome_message.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/application/models/m_reciept_book.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/application/views/recieptBook/detail_dep.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/application/views/recieptBook/recieptBookForDepartment.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/application/views/detailReceiveOutsite/headmenu.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/application/libraries/nm_saraban_lib.php</file>
+        </group>
+    </open-files>
+</project-private>

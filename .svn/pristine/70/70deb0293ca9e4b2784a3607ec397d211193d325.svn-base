@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/views/usermanager/manageuser.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/views/usermanager/normal_system/normal_system.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/views/usermanager/admin_system/admin_system.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/views/usermanager/normal_system/institution_amphur_page.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/libraries/sarabanflow_lib.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/assets/myjs/normal_system.js</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/views/include/header.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/models/usermanagement/m_normal_system.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/controllers/usermanagement/normal_system.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/views/usermanager/normal_system/institution_province_page.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/controllers/manageuser.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/views/usermanager/normal_system/institution_district_page.php</file>
+        </group>
+    </open-files>
+</project-private>

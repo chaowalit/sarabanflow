@@ -1,0 +1,14 @@
+
+    $( document ).ready(function() {
+        $("#edit_admin_system").validate({
+              rules: {
+                      username: "required"
+                     },
+
+                  messages: {
+                      username: "<p style = 'color:red;'>กรุณากรอกชื่อผู้ใช้</p>"
+                      
+                  }
+        });
+    });
+

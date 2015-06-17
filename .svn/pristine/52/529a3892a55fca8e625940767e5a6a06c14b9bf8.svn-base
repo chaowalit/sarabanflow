@@ -1,0 +1,96 @@
+<div class="container-fluid">
+    <section class="container">
+        <div class="container-page">				
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="form-group col-lg-12 text-left">
+                       <div style = "width :100% ; background-color: #3e8f3e; padding-left :15px;color:#FFFFFF"><h3><img src = "assets/img/icon07.jpg" width = "40px">&nbsp;&nbsp;<b>ส่งเอกสาร</b></h3></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-12 text-left">
+                        <a href="index.php/bookSend/bookSend" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true">&nbsp;ย้อนกลับ</span></a>
+                    </div>
+                </div>
+
+                <hr width="100%">
+                
+                <div class="row">
+                <center>
+                   <div class="container">
+                    <input type = "text" id = "send_create" name = "send_create" value="<?php echo $id_data;?>"/>
+					<div class="row">
+				      <div class="col-md-offset-2 col-md-8 col-md-offset-2">
+				        <div class="well well-sm">
+				          <form class="form-horizontal" action="" method="post">
+				          <fieldset>
+				            <legend class="text-center"> <b>ส่งเอกสาร</b> </legend>
+				    
+				            <!-- Name input-->
+				            <div class="form-group">
+				              <label class="col-md-3 control-label" for="name">เลือกรูปแบบการส่ง</label>
+				              <div class="col-md-9">
+				               <select class="form-control" name = "send_type" id = "send_type">
+								  <option value="2">กรณี ส่งถึง - พร้อมแนบเอกสารสำเนา</option>
+								  <option value="2">กรณีส่งถึง - พร้อมมีเอกสารตัวจริงส่งตามภายหลัง</option>
+								</select>
+				              </div>
+				            </div>
+
+				            <!-- Name input-->
+				            <div class="form-group">
+				              <label class="col-md-3 control-label" for="name">เลือกหน่วยงาน</label>
+				              <div class="col-md-9">
+				              <select class="form-control" name = "province" id = "province">
+				              	<option value="0"><?php echo "เลือกจังหวัด";?></option>
+				                 <?php foreach(getAllDataProvince() as $row){?>
+				                   	 <option value="<?php echo $row->province_id;?>"><?php echo $row->province_name;?></option>
+				                 <?php }?>
+				                 </select>
+				                 <br/>
+				                 <div id = "list_instutision"></div>
+				              </div>
+				            </div>
+				    
+				            <!-- Message body -->
+				            <div class="form-group">
+				              <label class="col-md-3 control-label" for="message">รายละเอียดการส่ง</label>
+				              <div class="col-md-9">
+				                <textarea class="form-control" id="message" name="message" placeholder="รายละเอียดการส่ง" rows="5"></textarea>
+				              </div>
+				            </div>
+				    
+				            <!-- Form actions -->
+				            <div class="form-group">
+				              <div class="col-md-12 text-right">
+				                <a href = "index.php/bookSend/bookSend/Send_To" class = "btn btn-danger btn-lg">ยกเลิก</a>
+				                <button type="submit" class="btn btn-primary btn-lg">ยืนยัน</button>
+				              </div>
+				            </div>
+				          </fieldset>
+				          </form>
+				        </div>
+				      </div>
+					</div>
+				</div>
+				</center>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$.post( "index.php/bookSend/bookSend/GetDataProvince", function( data ) {
+			  $( "#list_instutision" ).html( data );
+		});
+
+		$("#province").change(function(event) {
+			$.post( "index.php/bookSend/bookSend/GetDataProvince_change",{'id':$(this).val()}, function( data ) {
+			  $( "#list_instutision" ).html( data );
+		    });
+		});
+	});
+</script>>

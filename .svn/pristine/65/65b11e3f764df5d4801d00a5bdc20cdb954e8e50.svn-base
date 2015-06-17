@@ -1,0 +1,30 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+require_once APPPATH.'libraries/nm_saraban_lib.php';
+class receiveDocumentOnline extends nm_saraban_lib{
+
+    function __construct() {
+        parent::__construct();
+        //$this->load->model('m_booksend');
+        $this->load->model('m_receive_document_online');
+    }
+    public function index(){
+        $check_data_instutition_main = $this->session->userdata('data_instutition_main');
+        if($check_data_instutition_main){
+            $data['result'] = $this->m_receive_document_online->getDataReceive_center();
+        }else{
+            $data['result'] = $this->m_receive_document_online->getDataReceive();
+        }
+        
+        $this->load->view('include/header');
+        $this->load->view('recieptBook/recieptBook',$data);
+        $this->load->view('include/footer');
+    }
+    
+    public function receiveDocumentOnlineForDepartment(){
+        $data['result'] = $this->m_receive_document_online->getDataReceiveOnlineDep();
+        var_dump($this->m_receive_document_online->getDataReceiveOnlineDep()); exit;
+        $this->load->view('include/header');
+        $this->load->view('online_receive_dep/online_receive_dep',$data);
+        $this->load->view('include/footer');
+    }
+}

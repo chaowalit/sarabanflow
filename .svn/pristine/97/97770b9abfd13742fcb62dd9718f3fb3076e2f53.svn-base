@@ -1,0 +1,33 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of m_dataExport
+ *
+ * @author chaowalit
+ */
+class m_dataExport extends CI_Model{
+    //put your code here
+    function registration_create($data){
+        $this->db->trans_start();
+        $this->db->insert('registration_create_number',$data);
+        $insert_id = $this->db->insert_id();
+        $this->db->trans_complete();
+        return  $insert_id;
+    }
+    function report_detail_registration_create($registration_create_number_id){
+        $this -> db -> select('*');
+        $this -> db -> from('registration_create_number');
+        $this -> db -> where('id', $registration_create_number_id);
+        $query = $this -> db -> get();
+        return $query->result();
+    }
+    function registration_create_upload_file($data){
+        $this->db->insert('registration_create_number_file_upload',$data);
+    }
+}

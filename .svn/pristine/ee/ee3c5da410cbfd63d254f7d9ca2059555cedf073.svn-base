@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <?php
+        header("Content-Type: application/vnd.ms-word");
+        header("Expires: 0");
+        header("Cache-Control:  must-revalidate, post-check=0, pre-check=0");
+        header("Content-disposition: attachment; filename=\"bookReceive.doc\"");
+        ?>
+
+    <center><br><br>
+        <h2>รายงานสมุดทะเบียนรับ</h2>
+        <table border="0">
+            <tr>
+                <th>ลำดับ</th>
+                <th>เลขทะเบียน</th>
+                <th>เอกสารเลขที่</th>
+                <th>เวลา</th>
+                <th>วันที่</th>
+                <th>จาก/ผู้ส่ง</th>
+                <th>เรื่อง</th>
+                <th>เรียน</th>
+            </tr>
+            <?php
+            foreach ($member as $rows) {
+                ?>
+                <tr>
+                    <td><?php echo $rows['level_institution'] ?></td>
+                    <td><?php echo $rows['level_institution'] ?></td>
+                    <td><?php echo $rows['level_institution'] ?></td>
+                    <td><?php echo $rows['level_institution'] ?></td>
+                    <td><?php echo $rows['level_institution'] ?></td>
+                    <td><?php echo $rows['level_institution'] ?></td>
+                    <td><?php echo $rows['level_institution'] ?></td>
+                    <td><?php echo $rows['level_institution'] ?></td>
+                </tr>
+            <?php } ?>
+        </table>
+    </center>
+</body>
+</html>

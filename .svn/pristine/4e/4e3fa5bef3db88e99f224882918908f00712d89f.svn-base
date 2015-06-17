@@ -1,0 +1,104 @@
+
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
+
+class sending extends CI_Controller {
+
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->model('m_sending');
+    }
+    public function index()
+    {
+
+    }
+    public function del_item($item = '')
+    {
+        $id    =  $_GET['item'];
+        $id_re =  $_GET['id_re'];
+        $institution_id_send = $this->session->userdata('item_select');
+        foreach ($institution_id_send as $key => $value) {
+             if($value ==  $id )
+             {
+                unset($institution_id_send[$key]);
+             }
+         }
+         $this->session->set_userdata('item_select',$institution_id_send);
+         $institution_id_send = $this->session->userdata('item_select');
+
+         redirect('bookSend/bookSend/Send_To/'.$id_re,'refresh');
+    }
+    public function addItem()
+    {
+        $item_select = $this->input->post('item_select');
+        echo "<pre>";
+        print_r($item_select);
+        echo "</pre>";
+    }
+    public function sending_data()
+    {   
+        $id_redirect =  $this->input->post('id_redirect');
+        $select_ins =  $this->input->post('select_ins');
+        $id_data   = $this->input->post('id_data');
+        $data['id_data'] = $id_data;
+        if($select_ins == 1)
+        {
+            $data['level'] = 'institution_province_name';
+        }
+         if($select_ins == 2)
+        {
+            $data['level'] = 'institution_amphur_name';
+        }
+         if($select_ins == 3)
+        {
+            $data['level'] = 'institution_district_name';
+        }
+        $data['list_institution'] = $this->m_sending->getdata($id_redirect , $select_ins);
+        $this->load->view('sending/list_sending',$data);
+    }
+    public function unset_session()
+    {
+         $id  = $this->input->post('id');
+         $institution_id_send = $this->session->userdata('list_send');
+         foreach ($institution_id_send as $key => $value) {
+             if($value ==  $id )
+             {
+                unset($institution_id_send[$key]);
+             }
+         }
+         $this->session->set_userdata('list_send',$institution_id_send);
+    }
+    public function set_session($set_session = '')
+    {    
+         if($this->session->userdata('item_select'))
+         {  
+            $item_select_push  = $this->input->post('item_select');
+            $item_select = $this->session->userdata('item_select');
+            foreach ($item_select as $key1 => $value1) {
+                foreach ($item_select_push as $key2 => $value2) {
+                    if($value1  == $value2)
+                    {
+                        unset($item_select_push[$key2]);
+                    }
+                }
+            }
+            $this->session->set_userdata('item_select',array_merge($item_select,$item_select_push));
+         }
+         else
+         { 
+             $item_select  = $this->input->post('item_select');
+             $this->session->set_userdata('item_select',$item_select);
+         }
+
+         redirect('bookSend/bookSend/Send_To/'.$set_session,'refresh');
+         
+    }
+    public function clear_ses()
+    {
+        $this->session->set_userdata('item_select','');
+    }
+}

@@ -1,0 +1,16 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+require_once APPPATH.'libraries/nm_saraban_lib.php';
+class dataExport extends nm_saraban_lib{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('m_dataExport');
+        $this->load->model('m_auth_login');
+    }
+    
+    public function index(){
+        $data['layer_priority'] = $this->getAllDataLayerPriority();
+        $this->load->view('dataExport/dataExport', $data);
+    }
+}
+

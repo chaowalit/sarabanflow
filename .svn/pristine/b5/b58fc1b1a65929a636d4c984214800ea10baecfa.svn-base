@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/controllers/maindata/document_category.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/controllers/maindata/document_type.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/controllers/maindata/prefix_name.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/controllers/maindata/document_send_or_recieve.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/config/hooks.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/controllers/auth_login.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/views/login.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/models/m_login.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/assets/validator/objective.js</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/controllers/welcome.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/controllers/maindata/document_icon.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/controllers/maindata/objective.php</file>
+            <file>file:/C:/wamp/www/sarabanflow/admin/application/hooks/myhook.php</file>
+        </group>
+    </open-files>
+</project-private>

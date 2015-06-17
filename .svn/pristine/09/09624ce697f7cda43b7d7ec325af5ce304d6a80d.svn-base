@@ -1,0 +1,167 @@
+<?php $this->load->view('include/header'); ?>
+<div class="container">
+    <div class="row">
+        <div class="form-group col-lg-12">
+            <div style = "width :100% ; background-color: #3e8f3e; padding-left :15px;color:#FFFFFF"><h3><img src = "assets/img/icon08.jpg" width = "40px" >&nbsp;&nbsp;<b>ออกเลขทะเบียนส่ง</b></h3></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-12 text-left">
+            <a href="index.php/welcome" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true">&nbsp;ย้อนกลับ</span></a>
+        </div>
+    </div>
+    <form action="<?php echo base_url(); ?>index.php/dataExport/dataExport/registration_create" method="POST">
+    <div class="row">
+        <div class="form-group col-lg-2 text-right">
+            <label>เอกสารที่<font color="red"> **</font></label>
+        </div>
+        <div class="form-group col-lg-2 ">
+            <input id="registration_number" name="registration_number" type="text" class="form-control"  placeholder="เอกสารที่">
+        </div>
+        <div class="form-group col-lg-2 ">
+            <div class="checkbox">
+                <label>
+                    <!--<input type="checkbox"> Check me out-->
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-2 text-right">
+            <label>ชั้นความเร็ว</label>
+        </div>
+        <div class="form-group col-lg-4">
+            <select name="layer_priority_id" id="layer_priority_id" class="form-control">
+                <?php 
+                $layer_priority = getAllDataLayerPriority();
+               
+                foreach($layer_priority as $row){ 
+                    ?>
+                <option value="<?php echo $row->id; ?>"><?php echo $row->pio_name; ?></option>
+                
+                <?php } ?>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-2 text-right">
+            <label>ลงวันที่</label>
+        </div>
+        <div class="form-group col-lg-4">
+            <input type="text" class="form-control" id="dated_send" name="dated_send" value="<?php echo date("Y-m-d"); ?>">
+        </div>
+        <div class="form-group col-lg-2 text-right">
+            <label>ชั้นความลับ</label>
+        </div>
+        <div class="form-group col-lg-4 text-right">
+            <select name="layer_secret_id" id="layer_secret_id" class="form-control">
+                <?php 
+                $layer_secret = getAllDataLayerSecret();
+               
+                foreach($layer_secret as $row){ 
+                    ?>
+                <option value="<?php echo $row->id; ?>"><?php echo $row->layer_name; ?></option>
+                
+                <?php } ?>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-2 text-right">
+            <label>จาก<font color="red"> **</font></label>
+        </div>
+        <div class="form-group col-lg-4">
+            <input id="from_send" name="from_send" type="text" class="form-control"  value="<?php echo $this->institution_name; ?>" readonly="true">
+        </div>
+        <div class="form-group col-lg-2 text-right">
+            <label>วัตถุประสงค์</label>
+        </div>
+        <div class="form-group col-lg-4">
+            <select class="form-control" name="objective_id" id="objective_id">
+                
+                <?php 
+                $objective = getAllDataObjective();
+               
+                foreach($objective as $row){ 
+                    ?>
+                <option value="<?php echo $row->id; ?>"><?php echo $row->objective_name; ?></option>
+                
+                <?php } ?>
+            </select>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-2 text-right">
+            <label>เรื่อง<font color="red"> **</font></label>
+        </div>
+        <div class="form-group col-lg-4">
+            <input id="subject" name="subject" type="text" class="form-control"  placeholder="เรื่อง">
+        </div>
+        <div class="form-group col-lg-2 text-right">
+            <label>วันที่ดำเนินการ</label>
+        </div>
+        <div class="form-group col-lg-4">
+            <input type="text" class="form-control" id="implementation_date" name="implementation_date" value="<?php echo date("d-m-Y"); ?>" readonly="true">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-2 text-right">
+            <label>เรียน<font color="red"> **</font></label>
+        </div>
+        <div class="form-group col-lg-4">
+            <input id="to_receive" name="to_receive" type="text" class="form-control"  placeholder="เรียน">
+        </div>
+        <div class="form-group col-lg-2 text-right">
+            <label>เวลาที่ดำเนินการ</label>
+        </div>
+        <div class="form-group col-lg-4">
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker4'>
+                    <input type='text' class="form-control" id="implementation_time" name="implementation_time" value="<?php echo date("H:i:s"); ?>" readonly="true"/>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-2 text-right">
+            <label>สิ่งที่ส่งมาด้วย</label>
+        </div>
+        <div class="form-group col-lg-4">
+            <input id="attach_detail" name="attach_detail" type="text" class="form-control"  placeholder="สิ่งที่ส่งมาด้วย">
+        </div>
+        <div class="form-group col-lg-2 text-right">
+            <label>ออกเลขทะเบียน/กำหนดเอง</label>
+        </div>
+        <div class="form-group col-lg-4">
+            <input id="custom_registration_number" name="custom_registration_number" type="text" class="form-control"  placeholder="ออกเลขทะเบียน/กำหนดเอง">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-2 text-right">
+            <label>อ้างถึง</label>
+        </div>
+        <div class="form-group col-lg-4 text-right">
+            <input id="reference_to" name="reference_to" type="text" class="form-control"  placeholder="อ้างถึง">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-2 text-right">
+            <label>รายละเอียด</label>
+        </div>
+        <div class="form-group col-lg-4">
+            <textarea class="form-control" name="detail" id="detail">รายละเอียด</textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-lg-12 text-right">
+            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-share" aria-hidden="true">&nbsp;ออกเลขทะเบียน</span></button>
+            <button type="reset" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true">&nbsp;ยกเลิก</span></button>
+        </div>
+    </div>
+    </form>
+</div>
+
+<?php $this->load->view('include/footer'); ?>

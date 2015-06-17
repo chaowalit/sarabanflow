@@ -1,0 +1,55 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+require_once APPPATH.'libraries/sarabanflow_lib.php';
+
+class institution_create_number extends sarabanflow_lib {
+
+	/**
+	 * Index Page for this controller.
+	 *
+	 * Maps to the following URL
+	 * 		http://example.com/index.php/welcome
+	 *	- or -  
+	 * 		http://example.com/index.php/welcome/index
+	 *	- or -
+	 * Since this controller is set as the default controller in 
+	 * config/routes.php, it's displayed at http://example.com/
+	 *
+	 * So any other public methods not prefixed with an underscore will
+	 * map to /index.php/welcome/<method_name>
+	 * @see http://codeigniter.com/user_guide/general/urls.html
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('maindata/m_institution_create_number');
+		$this->load->model('maindata/m_institution');
+	}
+	public function index()
+	{
+		$this->load->view('include/header');
+		$data['result'] = $this->m_institution->get_province();
+		$this->load->view('maindata/institution_create_number/institution_create_number',$data);
+		$this->load->view('include/footer');
+	}
+	public function getdata_from_province_institution()
+	{
+		$province_id = $this->input->post('province_id');
+		$data['result'] = $this->m_institution_create_number->getdata_from_province_institution($province_id);
+		$this->load->view('maindata/institution_create_number/subdata/subdata_province_institution',$data);
+	}
+	public function getdata_from_amphur_institution()
+	{
+		$amphur_id = $this->input->post('amphur_id');
+		$data['result'] = $this->m_institution_create_number->getdata_from_amphur_institution($amphur_id);
+		$this->load->view('maindata/institution_create_number/subdata/subdata_amphur_institution',$data);
+	}
+	public function getdata_from_tambol_institution()
+	{
+		$tambol_id = $this->input->post('tambol_id');
+		$data['result'] = $this->m_institution_create_number->getdata_from_tambol_institution($tambol_id);
+		$this->load->view('maindata/institution_create_number/subdata/subdata_tambol_institution',$data);
+	}
+}
+
+/* End of file welcome.php */
+/* Location: ./application/controllers/welcome.php */

@@ -1,0 +1,74 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+require_once APPPATH.'libraries/nm_saraban_lib.php';
+class detailReceiveOutsite extends nm_saraban_lib{
+      function __construct() {
+        parent::__construct();
+        $this->load->model('m_detailreceiveoutsite');
+    }
+    public function index(){
+       
+    }
+    public function show_detail($registration_receive_document_id = '' , $registration_create_number_id = '')
+    {
+        $data['result'] = $this->m_detailreceiveoutsite->getDetail($registration_receive_document_id);
+        
+        $data['registration_receive_document_id'] = $registration_receive_document_id;
+        $data['registration_create_number_id'] = $registration_create_number_id;
+        
+        $this->load->view('include/header');
+        $this->load->view('detailReceiveOutsite/detailReceiveOutsite', $data);
+        $this->load->view('include/footer');
+    }
+    
+    public function upload_document_attach_file($registration_receive_document_id = '' , $registration_create_number_id = ''){
+        $data['result'] = $this->m_detailreceiveoutsite->getDetail($registration_receive_document_id);
+        $data['attach_file_old'] = $this->m_detailreceiveoutsite->get_attach_file_old($registration_create_number_id);
+        $data['attach_file_new'] = $this->m_detailreceiveoutsite->get_attach_file_new($registration_receive_document_id);
+        
+        $data['registration_receive_document_id'] = $registration_receive_document_id;
+        $data['registration_create_number_id'] = $registration_create_number_id;
+        
+        $this->load->view('include/header');
+        $this->load->view('detailReceiveOutsite/document_attach_file', $data);
+        $this->load->view('include/footer');
+    }
+    
+    public function registration_receive_upload_file(){
+        $registration_create_number_id = $this->input->post('registration_create_number_id');
+        $registration_receive_document_id = $this->input->post('registration_receive_document_id');
+        
+        if (!empty($_FILES['images']['name'][0])) {
+            $array_file = upload_files($_FILES['images'], './uploads/registration_create_file');
+            foreach($array_file as $val){
+                $data = array(
+                    "registration_receive_document_id" => $registration_receive_document_id,
+                    "file_upload_name" => $val,
+                    "cdate" => date("Y-m-d H:i:s"),
+                    "udate" => date("Y-m-d H:i:s")
+                );
+                $this->m_detailreceiveoutsite->registration_receive_upload_file($data);
+            }
+        }
+        $this->session->set_flashdata('array_file_result', $array_file);
+        redirect('detailReceiveOutsite/detailReceiveOutsite/upload_document_attach_file/'.$registration_receive_document_id.'/'.$registration_create_number_id, 'refresh');
+    }
+    
+    public function delete_file_upload_registration($registration_receive_document_file_upload_id, $registration_receive_document_id, $registration_create_number_id){
+        $this->m_detailreceiveoutsite->delete_file_upload_registration($registration_receive_document_file_upload_id);
+        redirect('detailReceiveOutsite/detailReceiveOutsite/upload_document_attach_file/'.$registration_receive_document_id.'/'.$registration_create_number_id, 'refresh');
+    }
+    
+    public function delete($registration_receive_document_id, $registration_create_number_id){
+        $this->db->where('id', $registration_receive_document_id);
+        $this->db->delete('registration_receive_document');
+        redirect('recieptBook/recieptBook', 'refresh');
+    }
+    
+    public function edit($registration_receive_document_id, $registration_create_number_id){
+        $data['result'] = $this->m_detailreceiveoutsite->getDetail($registration_receive_document_id);
+        //$data['id_send'] = $id;
+        $this->load->view('include/header');
+        $this->load->view('detailReceiveOutsite/show_edit_detail_registration_receive', $data);
+        $this->load->view('include/footer');
+    }
+}

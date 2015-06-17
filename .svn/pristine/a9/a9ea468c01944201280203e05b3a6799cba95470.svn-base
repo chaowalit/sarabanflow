@@ -1,0 +1,54 @@
+
+<?php
+
+class m_detailreceiveoutsite extends CI_Model {
+    
+    public function getDetail($registration_receive_document_id = "") {
+        $this->db->select('*');
+        $this->db->from('registration_receive_document');
+        $this->db->join('registration_receive_document_of_run', 'registration_receive_document_of_run.registration_receive_document_id = registration_receive_document.id');
+        $this->db->where('registration_receive_document.id', $registration_receive_document_id);
+        $query = $this -> db -> get();
+        return $query->result_array();
+    }
+    
+    function get_attach_file_old($registration_create_number_id){
+        $this->db->select('*');
+        $this->db->from('registration_create_number_file_upload');
+        
+        $this->db->where('registration_create_number_id', $registration_create_number_id);
+        
+        $query = $this -> db -> get();
+        return $query->result_array();
+    }
+    
+    function get_attach_file_new($registration_receive_document_id){
+        $this->db->select('*');
+        $this->db->from('registration_receive_document_file_upload');
+        
+        $this->db->where('registration_receive_document_id', $registration_receive_document_id);
+        
+        $query = $this -> db -> get();
+        return $query->result_array();
+    }
+    
+    function registration_receive_upload_file($data){
+        $this->db->insert('registration_receive_document_file_upload',$data);
+    }
+    
+    function delete_file_upload_registration($registration_receive_document_file_upload_id){
+        $this->db->select('*');
+        $this->db->from('registration_receive_document_file_upload');
+        $this->db->where('id', $registration_receive_document_file_upload_id);
+        
+        $query = $this -> db -> get();
+        $temp = $query->result_array();
+        
+        unlink('uploads/registration_create_file/'.$temp[0]['file_upload_name']);
+        
+        $this->db->where('id', $registration_receive_document_file_upload_id);
+        $this->db->delete('registration_receive_document_file_upload'); 
+    }
+}
+
+?>

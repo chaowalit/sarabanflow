@@ -1,0 +1,15 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+require_once APPPATH.'libraries/nm_saraban_lib.php';
+class bookCircular extends nm_saraban_lib{
+      function __construct() {
+        parent::__construct();
+        $this->load->model('m_booksend');
+    }
+    public function index(){
+
+       $data['result'] = $this->m_booksend->getAll_Circular();
+        $this->load->view('include/header');
+        $this->load->view('bookSend/bookSend',$data);
+        $this->load->view('include/footer');
+    }
+}

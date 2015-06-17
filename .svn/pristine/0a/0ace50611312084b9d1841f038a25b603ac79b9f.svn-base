@@ -1,0 +1,77 @@
+<?php
+
+
+class nm_saraban_lib extends CI_Controller{
+    //put your code here
+    private $CI;
+    public $controller_name;
+    public $method_name;
+    //----------------------------------------
+    public $normal_account_id;
+    public $province_id;
+    public $level_institution_id;
+    public $level_institution;
+    public $username;
+    public $fullname;
+    public $user_detail;
+    public $permission_level;
+    //---------------------------------------
+    public $province_name;
+    public $institution_name;
+    public $institution_detail;
+    //---------------------------------------
+    public $department_of_instutition_id;
+    public $designation;
+    public $department_name;
+    public $department_number;
+    //---------------------------------------
+    public $registration_number = "bank007";
+    
+    function __construct($id = null)
+    {
+        parent::__construct($id);
+        $this->CI =& get_instance();
+        $this->CI->load->model('m_auth_login');	
+        $this->__login();
+        
+        $this->getControllerAndMethod();
+        //$this->__updateDataLogin();
+        //$this->load_js();
+    }
+    public function __login(){
+        
+        if($this->session->userdata('data_account_normal')){
+            $data_login = $this->session->userdata('data_account_normal');
+            
+            $this->normal_account_id = $data_login['normal_account_id'];
+            $this->department_of_instutition_id = $data_login['department_of_instutition_id'];
+            $this->province_id = $data_login['province_id'];
+            $this->level_institution_id = $data_login['level_institution_id'];
+            $this->level_institution = $data_login['level_institution'];
+            $this->designation = $data_login['designation'];
+            $this->username = $data_login['username'];
+            $this->fullname = $data_login['fullname'];
+            $this->user_detail = $data_login['user_detail'];
+            $this->permission_level = $data_login['permission_level'];
+            
+            $temp_province = $this->CI->m_auth_login->getDataProvinceOnly($data_login['province_id']);
+            $this->province_name = $temp_province[0]['province_name'];
+            
+            $temp_institution = $this->CI->m_auth_login->getDataInstitutionForLogin($this->level_institution_id, $this->province_id, $this->level_institution);
+            $this->institution_name = $temp_institution[0][$this->level_institution.'_name'];
+            $this->institution_detail = $temp_institution[0][$this->level_institution.'_detail'];
+            
+            $temp_department = $this->CI->m_auth_login->getDataDepartment_of_instutition($this->department_of_instutition_id);
+            $this->department_name = $temp_department[0]['department_name'];
+            $this->department_number = $temp_department[0]['department_id'];
+            
+        }else{
+            
+        }
+    }
+    public function getControllerAndMethod(){
+        $this->controller_name = $this->router->class;
+        $this->method_name = $this->router->method;
+    }
+    
+}

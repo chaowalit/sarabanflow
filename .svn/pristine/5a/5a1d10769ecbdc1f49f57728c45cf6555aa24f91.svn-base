@@ -1,0 +1,15 @@
+<hr style = "border-style: solid; border-width: 2px; border-color:#FF6600;">
+</body>
+<script src="assets/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+        
+    });
+    
+</script>
+
+</html>

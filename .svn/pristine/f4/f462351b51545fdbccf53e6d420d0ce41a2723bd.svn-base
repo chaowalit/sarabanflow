@@ -1,0 +1,26 @@
+<?php
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+require_once APPPATH . 'libraries/sarabanflow_lib.php';
+
+class normal_system extends sarabanflow_lib {
+    //put your code here
+    public function __construct() {
+        parent::__construct();
+        $this->load->model('usermanagement/m_usermanagement');
+        $this->load->model('usermanagement/m_normal_system');
+        
+        
+    }
+    public function index() {
+        $this->load->view('include/header');
+        $data['province'] = $this->m_normal_system->getDataProvinceAll();
+        $this->load->view('usermanager/normal_system/normal_system',$data);
+        $this->load->view('include/footer');
+    }
+    public function show_page_institution_province($province_id){
+        $data['institution_province'] = $this->m_normal_system->getDataInstitutionProvince($province_id);
+        
+        $this->load->view('usermanager/normal_system/institution_province_page',$data, FALSE);
+    }
+}

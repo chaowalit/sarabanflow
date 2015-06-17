@@ -1,0 +1,220 @@
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="box">
+        <div class="box-icon">
+            <span class="fa fa-4x fa-user"></span>
+        </div>
+        <div class="info">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <label class="col-md-5 control-label" for="institution_province">เลือกหน่วยงานระดับอำเภอ : </label>
+                        <div class="col-md-7">
+                            <select name="institution_amphur" id="institution_amphur" class="form-control">
+                                <option value="">กรุณาเลือก</option>
+                                <?php foreach ($institution_amphur as $row){ ?>
+                                <option value="<?php echo $row->id; ?>"><?php echo $row->institution_amphur_name; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <input type="button" name="create_user_institution_amphur" id="create_user_institution_amphur" class="btn btn-primary" value="เพิ่มผู้ใช้งาน">
+                </div>
+            </div>
+            <!-- form add modify user  ----------------------------------------------------------------------------------------------- -->
+            <br>
+                <div class="row" id="show_form_manage_user_institution_amphur">
+                    <div class="col-md-6 col-md-offset-3">
+                      <div class="well well-sm">
+                        <form class="form-horizontal" action="" method="post">
+                        <fieldset>
+                          <legend class="text-center">จัดการผู้ใช้งานหน่วยงานระดับอำเภอ</legend>
+
+                          <!-- Name input-->
+                          <div class="form-group">
+                            <label class="col-md-3 control-label" for="username">Username : </label>
+                            <div class="col-md-9">
+                              <input id="username" name="username" type="text" placeholder="Username" class="form-control">
+                            </div>
+                          </div>
+
+                          <!-- Email input-->
+                          <div class="form-group">
+                            <label class="col-md-3 control-label" for="password">Password</label>
+                            <div class="col-md-9">
+                                <input id="password" name="password" type="text" placeholder="Password" class="form-control">
+                            </div>
+                          </div>
+
+                          <!-- Message body -->
+                          <div class="form-group">
+                            <label class="col-md-3 control-label" for="fullname">ชื่อ-นามสกุล</label>
+                            <div class="col-md-9">
+                                <input id="fullname" name="fullname" type="text" placeholder="ชื่อ-นามสกุล" class="form-control">
+                              
+                            </div>
+                          </div>
+
+                          <!-- Message body -->
+                          <div class="form-group">
+                            <label class="col-md-3 control-label" for="user_detail">รายละเอียด</label>
+                            <div class="col-md-9">
+                                
+                                <textarea class="form-control" id="user_detail" name="user_detail" placeholder="รายละเอียด" rows="5"></textarea>
+                            </div>
+                          </div>
+                          
+                          <!-- Message body -->
+                          <div class="form-group">
+                            <label class="col-md-3 control-label" for="permission_level">กำหนดสิทธิ์การใช้งานระบบ</label>
+                            <div class="col-md-9">
+                                
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="permission_level[]" id="permission_level_1_amphur" value="1" checked> ทั่วไป
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="permission_level[]" id="permission_level_2_amphur" value="2"> แก้ไข
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="permission_level[]" id="permission_level_3_amphur" value="3"> ชั้นความลับ
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="permission_level[]" id="permission_level_4_amphur" value="4"> หัวหน้า
+                                    </label>
+                                
+                              
+                            </div>
+                          </div>
+                          
+                          <!-- Form actions -->
+                          <div class="form-group">
+                            <div class="col-md-12 text-right">
+                              <button type="submit" class="btn btn-primary btn-lg">บันทึก</button>
+                              <button type="reset" class="btn btn-danger btn-lg" id="btn_cancel_form_institution_amphur">ยกเลิก</button>
+                            </div>
+                          </div>
+                        </fieldset>
+                        </form>
+                      </div>
+                    </div>
+                </div>
+          
+            <!-- end form add modify user -------------------------------------------------------------------------------------------------->
+            <br>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tab-pane fade in active" id="list_user_institution_amphur">
+                        <table id="example_table_user_institution_amphur" class="display" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>ที่</th>
+                                    <th>username</th>
+                                    <th>ชื่อ-นามกุล</th>
+                                    <th>รายละเอียด</th>
+                                    <th>สิทธิ์การใช้งาน</th>
+                                    <th>จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    
+$(document).ready(function(){
+    $('#example_table_user_institution_amphur').DataTable();
+    $("#create_user_institution_amphur").hide();
+    $("#show_form_manage_user_institution_amphur").hide();
+    
+    $("#institution_amphur").on("change",function(){
+            //$("#show_page_institution_amphur").html('');
+            $("#show_page_institution_district").html('');
+            var pathname = window.location.pathname; // returns path only
+            var url      = window.location.href;     // returns full url 
+
+            var province_id = $("#province_id").val();
+            var institution_province_id = $("#institution_province").val();
+
+            if(province_id != "" && $(this).val() != ""){
+                $("#create_user_institution_amphur").show();
+                $("#show_page_institution_district").load(url+"/show_page_institution_district",{province_id:province_id, institution_province_id:institution_province_id, institution_amphur_id:$(this).val()} );
+            }else{
+                $("#create_user_institution_amphur").hide();
+                //$("#show_page_institution_amphur").html('');
+                $("#show_page_institution_district").html('');
+                $("#btn_cancel_form_institution_amphur").click();
+
+            }
+        });
+    
+    $("#create_user_institution_amphur").click(function(){
+        $("#show_form_manage_user_institution_amphur").show(300);
+        var scrolled = 300;
+            
+        $("#show_form_manage_user_institution_amphur").animate({
+                scrollTop:  scrolled
+        });
+    });
+    $("#btn_cancel_form_institution_amphur").click(function(){
+        $("#show_form_manage_user_institution_amphur").hide(300);
+    });
+    
+    $("#permission_level_1_amphur").click(function(){
+        $('#permission_level_1_amphur').prop('checked', true);
+        
+        $("#permission_level_2_amphur").prop('checked', false);
+        $("#permission_level_3_amphur").prop('checked', false);
+        $('#permission_level_4_amphur').prop('checked', false);
+    });
+    
+    $("#permission_level_2_amphur").click(function(){
+        if(this.checked) {
+            $('#permission_level_1_amphur').prop('checked', true);
+        }else{
+            $('#permission_level_1_amphur').prop('checked', true);
+            
+            $('#permission_level_3_amphur').prop('checked', false);
+            $('#permission_level_4_amphur').prop('checked', false);
+        }
+        
+    });
+    
+    $("#permission_level_3_amphur").click(function(){
+        if(this.checked) {
+            $('#permission_level_1_amphur').prop('checked', true);
+            $("#permission_level_2_amphur").prop('checked', true);
+        }else{
+            $('#permission_level_1_amphur').prop('checked', true);
+            $("#permission_level_2_amphur").prop('checked', true);
+            
+            $("#permission_level_3_amphur").prop('checked', false);
+            $('#permission_level_4_amphur').prop('checked', false);
+        }
+        
+    });
+    
+    $("#permission_level_4_amphur").click(function(){
+        if(this.checked) {
+            $('#permission_level_1_amphur').prop('checked', true);
+            $("#permission_level_2_amphur").prop('checked', true);
+            $("#permission_level_3_amphur").prop('checked', true);
+        }else{
+            $('#permission_level_1_amphur').prop('checked', true);
+            $("#permission_level_2_amphur").prop('checked', true);
+            $("#permission_level_3_amphur").prop('checked', true);
+            
+            $('#permission_level_4_amphur').prop('checked', false);
+        }
+        
+    });
+});
+</script>

@@ -1,0 +1,28 @@
+   <div class="table-responsive">
+            <table id="myTables" class="table table-bordred table-striped">
+                <thead>
+                <th>สถานะเอกสาร</th>
+                <th>วันที่</th>
+                <th>เวลา</th>
+                <th>ผู้ส่ง</th>
+                <th>ถึง</th>
+                <th>หมายเหตุ</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1111</td>
+                        <td>1111</td>
+                        <td>1111</td>
+                        <td>1111</td>
+                        <td>1111</td>
+                        <td>1111</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#myTables').DataTable();
+    });
+</script>

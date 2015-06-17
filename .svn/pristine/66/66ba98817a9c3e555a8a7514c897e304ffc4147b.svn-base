@@ -1,0 +1,14 @@
+<?php
+
+class m_sending_dep extends CI_Model{
+	
+	public function getContact($id = '')
+	{
+		$sql = "
+          select * from receive_document_department where registration_create_number_id = $id
+        ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+	}
+}

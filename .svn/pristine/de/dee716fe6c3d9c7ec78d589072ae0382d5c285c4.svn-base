@@ -1,0 +1,255 @@
+<div class="container-fluid">
+    <section class="container">
+        <div class="container-page">				
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="form-group col-lg-12 text-left">
+                       <div style = "width :100% ; background-color: #3e8f3e; padding-left :15px;color:#FFFFFF"><h3><img src = "assets/img/icon01.jpg" width = "40px">&nbsp;&nbsp;<b>ลงรับเอกสารจากตระกร้าออนไลน์</b></h3></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-12 text-left">
+                        <!-- <a href="index.php/receiveDocumentOnline/receiveDocumentOnline" class="btn btn-warning"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true">&nbsp;ลงรับเอกสารจากตะกร้า Online</span></a>-->
+                        <a href="index.php/welcome" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true">&nbsp;ย้อนกลับ</span></a>
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-2 text-right">
+                        <label>ข้อความในการค้นหา</label>
+                    </div>
+                    <div   class="form-group col-lg-3">
+                        <form action="" class="search-form">
+                            <div class="form-group has-feedback ">
+                                <label for="search" class="sr-only">Search</label>
+                                <input type="text" class="form-control " name="search" id="search" placeholder="search">
+                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+
+                            </div>
+                        </form>
+
+                    </div>
+                    <div   class="form-group col-lg-7">
+                        <button class="btn btn-primary"><span class="glyphicon glyphicon-eye-open" aria-hidden="true">&nbsp;แสดงทั้งหมด</span></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-2 text-right">
+                        <label>ค้นหาตามวันที่</label>
+                    </div>
+                    <div class="form-group col-lg-2">
+                        <input type="date" class="form-control" id="startdate" name="startdate">
+                    </div>
+                    <div class="form-group col-lg-1 text-center">
+                        <label>ถึง</label>
+                    </div>
+                    <div class="form-group col-lg-2">
+                        <input type="date" class="form-control" id="startdate" name="startdate">
+                    </div>
+                    <div   class="form-group col-lg-2">
+                        <button class="btn btn-primary"><span class="glyphicon glyphicon-eye-close" aria-hidden="true">&nbsp;แสดงผล</span></button>
+                    </div>
+                </div>
+                <hr width="100%">
+                <div class="row">
+                    <div class="form-group col-lg-12 text-right">
+                    <div class="tab-pane fade in active" id="tab1default">
+                        <table id="example" class="display" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th>เลขทะเบียน</th>
+                                    <th>เอกสารเลขที่</th>
+                                    <th>วันที่</th>
+                                    <th>เวลา</th>
+                                    <th>จาก</th>
+                                    <th>เรื่อง</th>
+                                    <th>เรียน</th>
+                                    <th>รายละเอียดเอกสาร</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                        <?php 
+                        $count = 0;
+                        foreach($result as $row){
+                            $count++;
+
+                            $id    = $row['level_institution_id'];
+                            $level = $row['level_institution'];
+                        
+
+                            $sql = "
+                            select * from number_of_institution
+                            where instutition_id  =  $id
+                            and instutition_level = '$level' 
+                            ";
+                            $result1 = $this->db->query($sql);
+                            $result2 = $result1->result_array();
+                            // echo "<pre>";
+                            // print_r($result2);
+                            // echo "</pre>";
+                            // exit;
+
+                            $sql1 = "
+                            select * from  $level  where id = $id ;
+                            ";
+
+                            $result3 = $this->db->query($sql1);
+                            $result4 = $result3->result_array();
+                            // echo "<pre>";
+                            // print_r($result4);
+                            // echo "</pre>";
+                            // exit;
+                            ?>
+                            <tr>
+                                <td>
+                                    <?php 
+                                        echo "<img src = 'assets/file/wtype02.gif' title='เอกสารรับจากออนไลน์' />&nbsp;";
+                                        if($row['status_reading'] == 'yes')
+                                        {
+                                            echo "<img src = 'assets/file/open.gif' title='เอกสารเปิดอ่านแล้ว'/>";
+                                        }
+                                        else
+                                        {
+                                            
+                                        }
+                                                if($row['layer_priority_id'] == 2)
+                                                {
+                                                     echo "&nbsp;<img src = 'assets/file/a2.gif' title = 'ด่วน'>&nbsp;";
+                                                }
+                                                else if($row['layer_priority_id'] == 3)
+                                                {
+                                                     echo "&nbsp;<img src = 'assets/file/a3.gif' title = 'ด่วนมาก'>&nbsp;";
+                                                }
+                                                else if($row['layer_priority_id'] == 4)
+                                                {
+                                                     echo "&nbsp;<img src = 'assets/file/a4.gif' title = 'ด่วนที่สุด'>&nbsp;";
+                                                }
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php 
+                                        if($row['type_send'] == 1)
+                                        {
+                                            //echo "<p style = 'color:blue;'>พร้อมแนบเอกสารสำเนา</p>";
+                                            echo "<img src = 'assets/file/doc1.jpg' title='พร้อมแนบเอกสารสำเนา' />";
+                                        }
+                                        else
+                                        {
+                                            //echo "<p style = 'color:red;'>พร้อมมีเอกสารตัวจริง</p>";
+                                            echo "<img src = 'assets/file/doc2.jpg' title='พร้อมมีเอกสารตัวจริง' />";
+                                        }
+                                        $col = $row['registration_create_number_id'];
+                                        // echo  $col ;
+                                        // exit;
+                                        $sql = "select * from registration_create_number_file_upload where registration_create_number_id =  $col ";
+                                        $result = $this->db->query($sql);
+                                        $temp2 = $result->result_array();
+                                        if(count($temp2) > 0)
+                                        {
+                                            echo "&nbsp;<img src = 'assets/file/attachmore.gif' title = 'มีเอกสารแนบ'>&nbsp;";
+                                        }
+                                    ?>
+                                </td>
+                                <td><?php echo $result2[0]['instutition_number'].$row['department_id']."/".$row['regis_type_for_create'].$row['number_of_run'];?></td>
+                                <td><?php echo $row['dated_send'];?></td>
+                                <td><?php echo $row['created'];?></td>
+                                <td>
+                                    <?php 
+                                        if($level == "institution_province")
+                                        {   
+                                            if($this->permission_level > 2)
+                                            {
+                                                echo $result4[0]['institution_province_name'];
+                                            }
+                                            else
+                                            {
+                                                echo "--?--";
+                                            }
+                                        }
+                                        if($level == "institution_amphur")
+                                        {   
+                                            if($this->permission_level > 2)
+                                            {
+                                                echo $result4[0]['institution_amphur_name'];
+                                            }
+                                            else
+                                            {
+                                                echo "--?--";
+                                            }
+                                            
+                                        }
+                                        if($level == "institution_district")
+                                        {   
+                                             if($this->permission_level > 2)
+                                            {
+                                                echo $result4[0]['institution_district_name']; 
+                                            }
+                                            else
+                                            {
+                                                echo "--?--";
+                                            }
+                                               
+                                        }
+                                    ?>    
+                                </td>
+                                <td>
+                                    <?php
+                                           if($this->permission_level > 2)
+                                            {
+                                                echo $row['subject'];
+                                            }
+                                            else
+                                            {
+                                                echo "--?--";
+                                            }
+                                    ?>
+                                </td>
+                                <td>
+                                      <?php
+                                           if($this->permission_level > 2)
+                                            {
+                                                echo $row['to_receive'];
+                                            }
+                                            else
+                                            {
+                                                echo "--?--";
+                                            }
+                                    ?>
+                                </td>
+                                <td><a href = "index.php/acceptBook/acceptBook/acceptBookkeep_document/<?php echo $row['document_outside'];?>/<?php echo $row['id_create_number'];?>" class =  "btn btn-warning">จัดการเอกสาร<a></td>
+                            </tr>
+                            <?php }?>
+                            </tbody>
+                        </table>
+                    </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script type="text/javascript">
+        <?php
+             if ($this->session->flashdata('insert_send1')) {
+        ?>
+             alert("ลงรับเอกสารเรียบร้อยแล้ว");
+        <?php } ?>
+        <?php
+             if ($this->session->flashdata('delete')) {
+        ?>
+            alert("ลบข้อมูลเรียบร้อยแล้ว");
+        <?php } ?>
+        <?php
+             if ($this->session->flashdata('insert_send2')) {
+        ?>
+             alert("ตีกลับเอกสารเรียบร้อยแล้ว");
+        <?php } ?>
+
+        var tooltips = $( "[title]" ).tooltip({
+          position: {
+            my: "left buttom",
+            at: "right+5 top-5"
+          }
+        });
+</script>

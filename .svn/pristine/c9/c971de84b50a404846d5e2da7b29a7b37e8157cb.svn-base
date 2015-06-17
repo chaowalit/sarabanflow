@@ -1,0 +1,40 @@
+
+<?php
+
+class m_booksend extends CI_Model {
+
+    function __construct() {
+        
+    }
+
+    public function getAll() {
+        $sql = "select * from registration_create_number  order by id asc ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+
+    public function getsearch($valueSearch = "",$level_institution_id ="",$level_institution = "") {
+        $sql = "select * from registration_create_number  "
+                . "where level_institution_id = $level_institution_id "
+                . "  and level_institution = $level_institution and "
+                . "("
+                . "      subject like '%$valueSearch%'"
+                . "or to_receive like '%$valueSearch%'"
+                . " "
+                . ")";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    
+    public function getDetail($idDetail = "") {
+        $sql = "select * from registration_create_number where id = $idDetail";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+
+}
+
+?>

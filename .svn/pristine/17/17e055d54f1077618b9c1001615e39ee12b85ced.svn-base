@@ -1,0 +1,62 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+require_once APPPATH.'libraries/nm_saraban_lib.php';
+class dataExport extends nm_saraban_lib{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('m_dataExport');
+        $this->load->model('m_auth_login');
+    }
+    
+    public function index(){
+        
+        $this->load->view('dataExport/dataExport');
+    }
+    
+    public function registration_create(){
+        $registration_number = $this->input->post('registration_number');
+        $layer_priority_id = $this->input->post('layer_priority_id');
+        $dated_send = $this->input->post('dated_send');
+        $layer_secret_id = $this->input->post('layer_secret_id');
+        $from_send = $this->input->post('from_send');
+        $objective_id = $this->input->post('objective_id');
+        $subject = $this->input->post('subject');
+        $implementation_date = $this->input->post('implementation_date');
+        $to_receive = $this->input->post('to_receive');
+        $implementation_time = $this->input->post('implementation_time');
+        $attach_detail = $this->input->post('attach_detail');
+        $custom_registration_number = trim($this->input->post('custom_registration_number'));
+        $reference_to = $this->input->post('reference_to');
+        $detail = $this->input->post('detail');
+        
+        $data = array(
+            "institution_create_numbers_id" => 1,
+            "registration_number" => 2,
+            "registration_type" => "normal",
+            "dated_send" => date("Y-m-d" ,  strtotime($dated_send)),
+            "level_institution_id" => $this->level_institution_id,
+            "level_institution" => $this->level_institution,
+            "subject" => $subject,
+            "to_receive" => $to_receive,
+            "attach_detail" => $attach_detail,
+            "reference_to" => $reference_to,
+            "detail" => $detail,
+            "layer_priority_id" => $layer_priority_id,
+            "layer_secret_id" => $layer_secret_id,
+            "objective_id" => $objective_id,
+            "custom_registration_number" => ($custom_registration_number != "")? "Yes":"No",
+            "created" => date("Y-m-d H:i:s"),
+            "updated" => date("Y-m-d H:i:s")
+        );
+        
+        $registration_create_number_id = $this->m_dataExport->registration_create($data);
+        
+        $this->report_detail_registration_create($registration_create_number_id);
+    }
+    
+    public function report_detail_registration_create($registration_create_number_id){
+        
+        $this->load->view('dataExport/report_detail_registration_create');
+    }
+}
+

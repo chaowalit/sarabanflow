@@ -1,0 +1,18 @@
+<?php
+
+class m_printreport extends CI_Model {
+
+    function __construct() {
+        
+    }
+    public function alldata() {
+        $sql = "select * from registration_create_number";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+
+
+}
+
+?>

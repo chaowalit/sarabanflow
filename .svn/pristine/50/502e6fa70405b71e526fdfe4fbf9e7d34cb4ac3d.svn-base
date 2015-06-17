@@ -1,0 +1,114 @@
+
+
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+require_once APPPATH . 'libraries/nm_saraban_lib.php';
+
+class bookSend extends nm_saraban_lib {
+
+    function __construct() {
+        parent::__construct();
+        $this->load->model('m_booksend');
+    }
+
+    public function index() {
+        $data['result'] = $this->m_booksend->getAll();
+        $data['type_data'] = "ธรรมดา";
+        $this->load->view('include/header');
+        $this->load->view('bookSend/bookSend', $data);
+        $this->load->view('include/footer');
+    }
+
+    public function Send_To_instutition() {
+        $send_create = $this->input->post('send_create');
+        $send_type = $this->input->post('send_type');
+        $province = $this->input->post('province');
+        $message = $this->input->post('message');
+        $institution_id_send = $this->input->post('institution_id_send');
+
+
+        foreach ($institution_id_send as $row) {
+            $data_id = explode(',', $row);
+            $this->db->set('registration_create_number_id', $send_create);
+            $this->db->set('institution_id_for_send', $data_id[0]);
+            $this->db->set('institution_level_for_send', $data_id[1]);
+            $this->db->set('status_reading', 'no');
+            $this->db->set('status_return_document', 'no');
+            $this->db->set('reason_return_document', "");
+            $this->db->set('detail', $message);
+            $this->db->set('type_send', $send_type);
+            $this->db->set('cdate', 'NOW()', FALSE);
+            $this->db->set('udate', 'NOW()', FALSE);
+            $this->db->set('active', 1);
+            $this->db->insert('registration_send_document_outside');
+        }
+
+        $this->db->set('status_sending', 1);
+        $this->db->where('id', $send_create);
+        $this->db->update('registration_create_number');
+
+        $this->session->set_flashdata('insert_dep1', 'Value');
+
+        redirect('bookSend/bookSend', 'refresh');
+    }
+
+    public function Send_To($id = '') {
+        $data['id_data'] = $id;
+        $this->load->view('include/header');
+        $this->load->view('bookSend/Send_To', $data);
+        $this->load->view('include/footer');
+    }
+
+    public function GetDataProvince() {
+        $this->load->view('bookSend/sub/ShowList');
+    }
+
+    public function GetDataProvince_change() {
+        $id = $this->input->post('id');
+        $data['result_province'] = $this->m_booksend->GetDataProvince_change_province($id);
+        $data['result_amphur'] = $this->m_booksend->GetDataProvince_change_amphur($id);
+        $data['result_tambol'] = $this->m_booksend->GetDataProvince_change_tambol($id);
+        $this->load->view('bookSend/sub/ShowList', $data);
+    }
+
+    public function showDetail($id = '') {
+        $data['result'] = $this->m_booksend->getDetail($id);
+        $data['id_send'] = $id;
+        $this->load->view('include/header');
+        $this->load->view('bookSend/show_detail_bookSend', $data);
+        $this->load->view('include/footer');
+    }
+
+    public function edit($id = '') {
+        $data['result'] = $this->m_booksend->getDetail($id);
+        $this->load->view('include/header');
+        $this->load->view('bookSend/show_edit_detail_bookSend', $data);
+        $this->load->view('include/footer');
+    }
+
+    public function delete($id = '') {
+        $this->db->where('id', $id);
+        $this->db->delete('registration_create_number');
+        redirect('bookSend/bookSend', 'refresh');
+    }
+
+    public function serach($level_institution_id = "", $level_institution = "") {
+        $search = $this->input->post('search');
+        $data['result'] = $this->m_booksend->getsearch($level_institution_id, $level_institution, $search);
+        $data['type_data'] = "ธรรมดา";
+        $this->load->view('include/header');
+        $this->load->view('bookSend/bookSend', $data);
+        $this->load->view('include/footer');
+    }
+
+    public function followUp($id = "") {
+        $data['result'] = $this->m_booksend->getDetail($id);
+        $data['id_send'] = $id;
+        $this->load->view('include/header');
+        $this->load->view('bookSend/followup', $data);
+        $this->load->view('include/footer');
+    }
+
+}

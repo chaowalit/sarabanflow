@@ -1,0 +1,174 @@
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+require_once APPPATH . 'libraries/nm_saraban_lib.php';
+
+class book_receive extends nm_saraban_lib {
+    function __construct() {
+        parent::__construct();
+        $this->load->model('m_printreport');
+    }
+    public function index() {
+        $this->load->view('include/header');
+        $this->load->view('bookreceive/book_receive');
+        $this->load->view('include/footer');
+    }
+
+    public function bookReceive() {
+        $this->load->view('include/header');
+        $this->load->view('bookreceive/book_receive');
+        $this->load->view('include/footer');
+    }
+
+    public function bookSend() {
+        $this->load->view('include/header');
+        $this->load->view('bookreceive/book_send');
+        $this->load->view('include/footer');
+    }
+
+    public function printReport() {
+        $this->load->view('include/header');
+        $this->load->view('bookreceive/print_report');
+        $this->load->view('include/footer');
+    }
+
+    public function confirmBookReceive(){
+        $level_institution_id =  $this->level_institution_id;
+        $level_institution    = $this->level_institution;
+        $typeSelect           = $this->input->post('typeSelect');
+        $from_number_of_run   = $this->input->post('from_number_of_run');
+        $to_number_of_run     = $this->input->post('to_number_of_run');
+        $startDate            = $this->input->post('startDate');
+        $endDate              = $this->input->post('endDate');
+        $subject              = $this->input->post('subject');
+        $to_receive           = $this->input->post('to_receive');
+        $number_of_run_1      = $this->input->post('number_of_run_1');
+        $number_of_run_2      = $this->input->post('number_of_run_2');
+        $number_of_run_3      = $this->input->post('number_of_run_3');
+        $number_of_run_4      = $this->input->post('number_of_run_4');
+        $number_of_run_5      = $this->input->post('number_of_run_5');
+        $number_of_run_6      = $this->input->post('number_of_run_6');
+        $number_of_run_7      = $this->input->post('number_of_run_7');
+        $number_of_run_8      = $this->input->post('number_of_run_8');
+        if ($startDate != ""){
+            $newStartDate = date("Y-m-d",strtotime($startDate));
+        }else{
+            $newStartDate = "";
+        }
+        if ($endDate != ""){
+            $newEndDate   = date("Y-m-d",strtotime($endDate));
+        }else{
+            $newEndDate = "";
+        }
+        $data['result'] = $this->m_printreport->getDataFromPrintReportBookReceive($level_institution_id,$level_institution,$typeSelect,$from_number_of_run,$to_number_of_run,$newStartDate,$newEndDate,$subject,$to_receive,$number_of_run_1,$number_of_run_2,$number_of_run_3,$number_of_run_4,$number_of_run_5,$number_of_run_6,$number_of_run_7,$number_of_run_8);
+        
+       // echo '<pre>';
+        //print_r($data);
+        //echo '</pre>';
+       // exit;
+        
+        $this->session->set_userdata('mydataSearchReceive',$data['result']);
+        $this->load->view('include/header');
+        $this->load->view('bookreceive/confirm_book_receive',$data);
+        $this->load->view('include/footer');
+        
+    }
+    
+    
+    public function toDocReceive() {
+        //$data['member'] = $this->m_printreport->alldata();
+        $data['result'] = $this->session->userdata('mydataSearchReceive');
+       // echo '<pre>';
+        //print_r($data);
+       // echo '</pre>';
+        //exit;
+        $this->load->view('bookreceive/book_receive_print_report',$data);
+        //$this->index();
+    }
+    
+    //พิมพ์รายงานสมุดทะเบียนส่ง
+    public function confirmBookSend(){
+        $level_institution_id =  $this->level_institution_id;
+        $level_institution = $this->level_institution;
+        $typeSelect         = $this->input->post('typeSelect');
+        $from_number_of_run = $this->input->post('from_number_of_run');
+        $to_number_of_run   = $this->input->post('to_number_of_run');
+        $startDate          = $this->input->post('startDate');
+        $endDate            = $this->input->post('endDate');
+        $subject            = $this->input->post('subject');
+        $to_receive         = $this->input->post('to_receive');
+        $number_of_run_1      = $this->input->post('number_of_run_1');
+        $number_of_run_2      = $this->input->post('number_of_run_2');
+        $number_of_run_3      = $this->input->post('number_of_run_3');
+        $number_of_run_4      = $this->input->post('number_of_run_4');
+        $number_of_run_5      = $this->input->post('number_of_run_5');
+        $number_of_run_6      = $this->input->post('number_of_run_6');
+        $number_of_run_7      = $this->input->post('number_of_run_7');
+        $number_of_run_8      = $this->input->post('number_of_run_8');
+        if ($startDate != ""){
+            $newStartDate = date("Y-m-d",strtotime($startDate));
+        }else{
+            $newStartDate = "";
+        }
+        if ($endDate != ""){
+            $newEndDate   = date("Y-m-d",strtotime($endDate));
+        }else{
+            $newEndDate = "";
+        }
+        $data['result'] = $this->m_printreport->getDataFormPrintReportBookSend($from_number_of_run,$to_number_of_run,$newStartDate,$newEndDate,$subject,$to_receive,$level_institution_id,$level_institution,$typeSelect,$number_of_run_1,$number_of_run_2,$number_of_run_3,$number_of_run_4,$number_of_run_5,$number_of_run_6,$number_of_run_7,$number_of_run_8);
+        $this->session->set_userdata('mydataSearch',$data['result']);
+        $this->load->view('include/header');
+        $this->load->view('bookreceive/confirm_book_send',$data);
+        $this->load->view('include/footer');
+        
+    }
+    public function toDocSend(){
+        $data['result'] = $this->session->userdata('mydataSearch');
+        $this->load->view('bookreceive/book_send_print_report',$data);
+    }
+
+    
+    
+    
+    //พิมพ์รายงานสถิติ
+    public function confirmPrintReport(){
+        $startDate = $this->input->post('startDate');
+        $endDate   = $this->input->post('endDate');
+        if ($startDate != ""){
+            $newStartDate = date("d/m/Y",strtotime($startDate));
+            $newStartDateTemp = date("Y-m-d",strtotime($startDate));
+        }else{
+            $newStartDate = "";
+            $newStartDateTemp = "";
+        }
+        if ($endDate != ""){
+            $newEndDate   = date("d/m/Y",strtotime($endDate));
+            $newEndDateTemp = date("Y-m-d",strtotime($endDate));
+        }else{
+            $newEndDate = "";
+            $newEndDateTemp = "";
+        }
+        $level_institution_id =  $this->level_institution_id;
+        $level_institution = $this->level_institution;
+        $data['newStartDate'] = $newStartDate;
+        $data['newEndDate']   = $newEndDate;
+        $data['result'] = $this->m_printreport->getDataForPrintReport($level_institution_id,$level_institution,$newStartDateTemp,$newEndDateTemp);
+        $this->session->set_userdata('mydataSearchPrintReport',$data['result']);
+        $this->session->set_userdata('newStartDate',$data['newStartDate']);
+        $this->session->set_userdata('newEndDate',$data['newEndDate']);
+        $this->load->view('include/header');
+        $this->load->view('bookreceive/confirm_print_report',$data);
+        $this->load->view('include/footer');
+    }
+    
+    public function toDocReport(){
+        $data['result']       = $this->session->userdata('mydataSearchPrintReport');
+        $data['newStartDate'] = $this->session->userdata('newStartDate');
+        $data['newEndDate']   = $this->session->userdata('newEndDate');
+        $this->load->view('bookreceive/printreport_print_report',$data);
+    }
+}
+
+/* End of file welcome.php */
+/* Location: ./application/controllers/welcome.php */

@@ -1,0 +1,7 @@
+
+    &nbsp;&nbsp;<a href = "index.php/receiveDocumentOnline/receiveDocumentOnline" class = "btn btn-danger btn-lg">ย้อนกลับ</a>
+    &nbsp;&nbsp;<a href = "index.php/acceptBook/acceptBook/show_detail/<?php echo $id_accept;?>/<?php echo $id_create;?>" class = "btn btn-success btn-lg">รายละเอียด</a>
+    &nbsp;&nbsp;<a onclick="return confirm('ต้องการที่จะลงรับเอกสารจริงหรือไม่');" href = "index.php/acceptBook/acceptBook/save_data_accepted/<?php echo $id_accept;?>/<?php echo $id_create;?>" class = "btn btn-primary btn-lg">ลงรับเอกสาร</a>
+    &nbsp;&nbsp;<a href = "index.php/acceptBook/acceptBook/return_document/<?php echo $id_accept;?>/<?php echo $id_create;?>" class = "btn btn-warning btn-lg">ตีกลับเอกสาร</a>
+    <br/><br/>
+</div>

@@ -1,0 +1,27 @@
+     <div class="form-group col-lg-12 text-right">
+                    <div class="tab-pane fade in active" id="tab1default">
+                        <table id="example" class="display" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>ลำดับที่</th>
+                                    <th>เลขทะเบียน</th>
+                                    <th>เอกสารเลขที่</th>
+                                    <th>วันที่</th>
+                                    <th>เวลา</th>
+                                    <th>เรื่อง</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>aa</td>
+                                    <td>aa</td>
+                                    <td>aa</td>
+                                    <td>aa</td>
+                                    <td>aa</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                      </div>
+                    </div>

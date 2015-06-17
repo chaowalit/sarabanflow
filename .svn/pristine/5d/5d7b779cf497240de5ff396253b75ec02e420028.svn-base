@@ -1,0 +1,59 @@
+<table id="example" class="display" cellspacing="0" width="100%">
+						<thead>
+						        <tr>
+						            <th>ที่</th>
+						            <th>ชื่อหน่วยงาน</th>
+						            <th>รายละเอียด</th>
+						            <th>เลขทะเบียน</th>
+						            <th>Option</th>
+						        </tr>
+						</thead>			 		 	
+		  <tbody>
+		  	<?php 
+		  	$count = 0 ;
+		  	foreach($result as $row){
+		  	$count ++;
+		  	?>
+		  		<tr>
+		  			 <td><?php echo $count ; ?></td>
+		  			 <td><?php echo $row['institution_province_name']; ?></td>
+		  			 <td><?php echo $row['institution_province_detail']; ?></td>
+		  			 <td><?php 
+		  			 	if($row['instutition_number'] == "")
+		  			 	{
+		  			 		echo "<p style = 'color:red'><b>ยังไม่ได้สร้างเลขทะเบียน</p></b>";
+		  			 	}
+		  			 	else
+		  			 	{
+		  			 		echo $row['instutition_number'];
+		  			 	}
+		  			  ?>
+		  			  </td>
+		  			 <td>
+		  			 	<a href = "javascript:void(0);" data-toggle="modal" data-target="#myModal_provice" id = "<?php echo $row['id']; ?>" class = "btn btn-warning updateins1">เพิ่มเลขทะเบียน</a>
+		  			 </td>
+		  		</tr>	
+		  	<?php }?>
+        </tbody>
+</table>
+<script>
+			$(document).ready(function() {
+			    $('#example').DataTable();
+			    $(".updateins1").click(function(event) {
+				    var id = $(this).attr('id');
+				    var province_id = $("#province").val();
+				    $("#hide1").val(id);
+
+				    $('#instutition_level1 option[value!="0"]').remove();
+				        $.post( "index.php/maindata/institution/get_institution_province2",{'id':province_id}, function( data ) {     
+			               $('#instutition_level1').attr('enabled', 'true');
+			               $.each(data, function() {
+				                  $('#instutition_level1').append(
+			               $("<option></option>").text(this.institution_province_name).val(this.id)
+			                );
+			              });
+			        });
+
+			    });
+			});
+</script>

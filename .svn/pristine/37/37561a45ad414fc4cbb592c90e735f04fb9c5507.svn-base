@@ -1,0 +1,15 @@
+<?php
+
+class m_institution extends CI_Model {
+
+    public function get_province()
+    {
+        $sql    = "select * from province";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+
+}
+
+?>

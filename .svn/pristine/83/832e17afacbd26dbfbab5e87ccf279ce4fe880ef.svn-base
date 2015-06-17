@@ -1,0 +1,265 @@
+
+<?php
+
+class m_booksend extends CI_Model {
+
+    function __construct() {
+        
+    }
+    public function get_content($id = '')
+    {
+        $sql = "
+            select * from registration_create_number_file_upload where registration_create_number_id = $id
+        ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function getContact($id = '')
+    {
+        $sql = "
+            select * from registration_create_number a
+            left join registration_send_document_outside b on a.id = b.registration_create_number_id
+            where a.id = $id 
+        ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function getContact_return()
+    {   
+        $id    = $this->level_institution_id;
+        $level = $this->level_institution;
+        $sql = "
+            select * from registration_create_number a
+            left join registration_send_document_outside b on a.id = b.registration_create_number_id
+            where a.level_institution_id = $id
+            and a.level_institution    = '$level'
+            and b.status_return_document = 'yes'
+        ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function get_sender($id_create = "")
+    {
+        $sql = "
+            select * from registration_create_number where id = $id_create
+        ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function getDataReceive()
+    {     
+        $id    = $this->level_institution_id;
+        $level = $this->level_institution;
+        $sql = " 
+            select * , a.id AS document_outside,b.id AS id_create_number from registration_send_document_outside a
+            left join registration_create_number b  on a.registration_create_number_id = b.id
+            left join registration_create_number_of_run d on b.id = d.registration_create_number_id
+            left join department_of_instutition e on b.department_of_instutition_id = e.id
+            where a.institution_id_for_send = $id 
+            and a.institution_level_for_send = '$level'
+            and a.status_receive = 'no'
+            and a.status_return_document = 'no'
+        ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function getDataReceive_accept()
+    {     
+        $id    = $this->level_institution_id;
+        $level = $this->level_institution;
+        $sql = " 
+            select * , a.id AS document_outside,b.id AS id_create_number from registration_send_document_outside a
+            left join registration_create_number b  on a.registration_create_number_id = b.id
+            left join registration_create_number_of_run d on b.id = d.registration_create_number_id
+            left join department_of_instutition e on b.department_of_instutition_id = e.id
+            where a.institution_id_for_send = $id 
+            and a.institution_level_for_send = '$level'
+            and a.status_receive = 'yes'
+        ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function getAll() {
+            $id = $this->level_institution_id;
+            $level = $this->level_institution;
+            $sql = "select * from registration_create_number 
+                where registration_type = ''
+                and level_institution_id = $id
+                and level_institution = '$level'
+                order by id Desc 
+            ";
+            $result = $this->db->query($sql);
+            $result = $result->result_array();
+            return $result;
+    }
+    public function getAll_center() {
+            $id = $this->level_institution_id;
+            $level = $this->level_institution;
+            $sql = "select * from registration_create_number 
+                where registration_type = ''
+                and level_institution_central_id = $id
+                and level_institution_central = '$level'
+                and central_registration = 'yes'
+                order by id Desc 
+            ";
+            $result = $this->db->query($sql);
+            $result = $result->result_array();
+            return $result;
+    }
+    public function getAll_radio()
+    {  
+        $id = $this->level_institution_id;
+        $level = $this->level_institution;
+        $sql = "select * from registration_create_number 
+                where registration_type = '(วิทยุ)'
+                and level_institution_id = $id
+                and level_institution = '$level'
+                order by id Desc 
+                ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function getAll_radio_center()
+    {
+         $id = $this->level_institution_id;
+            $level = $this->level_institution;
+            $sql = "select * from registration_create_number 
+                where registration_type = '(วิทยุ)'
+                and level_institution_central_id = $id
+                and level_institution_central = '$level'
+                and central_registration = 'yes'
+                order by id Desc 
+            ";
+            $result = $this->db->query($sql);
+            $result = $result->result_array();
+            return $result;
+    }
+    public function getAll_Circular()
+    {    
+        $id = $this->level_institution_id;
+            $level = $this->level_institution;
+           $sql = "select * from registration_create_number 
+                where registration_type = '(ว)'
+                and level_institution_id = $id
+                and level_institution = '$level'
+                order by id Desc 
+                ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+     public function getAll_Circular_center()
+    {    
+        $id = $this->level_institution_id;
+            $level = $this->level_institution;
+            $sql = "select * from registration_create_number 
+                where registration_type = '(ว)'
+                and level_institution_central_id = $id
+                and level_institution_central = '$level'
+                and central_registration = 'yes'
+                order by id Desc 
+            ";
+            $result = $this->db->query($sql);
+            $result = $result->result_array();
+            return $result;
+    }
+    public function getAll_Command()
+    {   
+        $id = $this->level_institution_id;
+            $level = $this->level_institution;
+         $sql = "select * from registration_create_number 
+                where registration_type = '(คำสั่ง)'
+                and level_institution_id = $id
+                and level_institution = '$level'
+                order by id Desc 
+                ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function getAll_Command_center()
+    {
+        $id = $this->level_institution_id;
+            $level = $this->level_institution;
+            $sql = "select * from registration_create_number 
+                where registration_type = '(คำสั่ง)'
+                and level_institution_central_id = $id
+                and level_institution_central = '$level'
+                and central_registration = 'yes'
+                order by id Desc 
+            ";
+            $result = $this->db->query($sql);
+            $result = $result->result_array();
+            return $result;
+    }
+    public function getsearch($level_institution_id ="",$level_institution = "",$valueSearch = "") {
+        $sql = "select * from registration_create_number  "
+                . "where level_institution_id = '$level_institution_id' "
+                . "  and level_institution = '$level_institution' and "
+                . "("
+                . "      subject like '%$valueSearch%'"
+                . "or to_receive like '%$valueSearch%'"
+                . " "
+                . ") order by registration_create_number_of_run_id ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function getsearchAll($level_institution_id ="",$level_institution = "") {
+        $sql = "select * from registration_create_number  ";
+               // . "where level_institution_id = '$level_institution_id' "
+                //. "  and level_institution = '$level_institution'  "
+               // . "order by registration_create_number_of_run_id ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    
+    public function getDetail($idDetail = "") {
+        $sql = "select * from registration_create_number where id = $idDetail";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function GetDataProvince_change_province($id = '')
+    {
+        
+        $sql = "select * from institution_province where province_id = $id order by id DESC";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function GetDataProvince_change_amphur($id = '')
+    {
+        $sql = "select * from institution_amphur where province_id = $id order by id DESC";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function GetDataProvince_change_tambol($id = '')
+    {
+        $sql = "select * from institution_district where province_id = $id order by id DESC";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function update_registration_create_number($data, $registration_create_number_id){
+        $this->db->where('id', $registration_create_number_id);
+        $this->db->update('registration_create_number', $data); 
+    }
+    public function get_attach_file($registration_create_number_id){
+        $sql = "select * from registration_create_number_file_upload where registration_create_number_id = $registration_create_number_id order by created DESC";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+}
+
+?>

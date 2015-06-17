@@ -1,0 +1,26 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+require_once APPPATH.'libraries/nm_saraban_lib.php';
+class dataExport extends nm_saraban_lib{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('m_dataExport');
+        $this->load->model('m_auth_login');
+    }
+    
+    public function index(){
+        
+        $this->load->view('dataExport/dataExport');
+    }
+    
+    public function registration_create(){
+        
+        $this->report_detail_registration_create();
+    }
+    
+    public function report_detail_registration_create(){
+        
+        $this->load->view('dataExport/report_detail_registration_create');
+    }
+}
+

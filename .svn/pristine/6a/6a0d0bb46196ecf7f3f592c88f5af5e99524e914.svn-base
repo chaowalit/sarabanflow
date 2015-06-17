@@ -1,0 +1,120 @@
+
+<?php
+
+class m_booksend extends CI_Model {
+
+    function __construct() {
+        
+    }
+    public function getDataReceive()
+    {     
+        $id    = $this->level_institution_id;
+        $level = $this->level_institution;
+        $sql = " 
+            select * , a.id AS document_outside from registration_send_document_outside a
+            left join registration_create_number b  on a.registration_create_number_id = b.id
+            left join registration_create_number_of_run d on b.id = d.registration_create_number_id
+            left join department_of_instutition e on b.department_of_instutition_id = e.id
+            where a.institution_id_for_send = $id 
+            and a.institution_level_for_send = '$level'
+            and a.status_receive = 'no'
+        ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function getAll() {
+            $sql = "select * from registration_create_number 
+                where registration_type = ''
+                order by id Desc 
+            ";
+            $result = $this->db->query($sql);
+            $result = $result->result_array();
+            return $result;
+    }
+    public function getAll_radio()
+    {
+        $sql = "select * from registration_create_number 
+                where registration_type = '(วิทยุ)'
+                order by id Desc 
+                ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function getAll_Circular()
+    {
+           $sql = "select * from registration_create_number 
+                where registration_type = '(ว)'
+                order by id Desc 
+                ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function getAll_Command()
+    {
+         $sql = "select * from registration_create_number 
+                where registration_type = '(คำสั่ง)'
+                order by id Desc 
+                ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+
+    public function getsearch($level_institution_id ="",$level_institution = "",$valueSearch = "") {
+        $sql = "select * from registration_create_number  "
+                . "where level_institution_id = '$level_institution_id' "
+                . "  and level_institution = '$level_institution' and "
+                . "("
+                . "      subject like '%$valueSearch%'"
+                . "or to_receive like '%$valueSearch%'"
+                . " "
+                . ") order by registration_create_number_of_run_id ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function getsearchAll($level_institution_id ="",$level_institution = "") {
+        $sql = "select * from registration_create_number  ";
+               // . "where level_institution_id = '$level_institution_id' "
+                //. "  and level_institution = '$level_institution'  "
+               // . "order by registration_create_number_of_run_id ";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    
+    public function getDetail($idDetail = "") {
+        $sql = "select * from registration_create_number where id = $idDetail";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function GetDataProvince_change_province($id = '')
+    {
+        
+        $sql = "select * from institution_province where province_id = $id order by id DESC";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function GetDataProvince_change_amphur($id = '')
+    {
+        $sql = "select * from institution_amphur where province_id = $id order by id DESC";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+    public function GetDataProvince_change_tambol($id = '')
+    {
+         $sql = "select * from institution_district where province_id = $id order by id DESC";
+        $result = $this->db->query($sql);
+        $result = $result->result_array();
+        return $result;
+    }
+
+}
+
+?>

@@ -1,0 +1,41 @@
+<?php
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+require_once APPPATH . 'libraries/sarabanflow_lib.php';
+
+class normal_system extends sarabanflow_lib {
+    //put your code here
+    public function __construct() {
+        parent::__construct();
+        $this->load->model('usermanagement/m_usermanagement');
+        $this->load->model('usermanagement/m_normal_system');
+        
+        
+    }
+    public function index() {
+        
+        $data['province'] = $this->m_normal_system->getDataProvinceAll();
+        $this->load->view('usermanager/normal_system/normal_system',$data);
+        
+    }
+    public function show_page_institution_province($province_id){
+        $data['institution_province'] = $this->m_normal_system->getDataInstitutionProvince($province_id);
+        
+        $this->load->view('usermanager/normal_system/institution_province_page',$data, FALSE);
+    }
+    public function show_page_institution_amphur(){
+        $province_id = $this->input->post('province_id');
+        $institution_province_id = $this->input->post('institution_province_id');
+        
+        $data['institution_amphur'] = $this->m_normal_system->getDataInstitutionAmphur($province_id, $institution_province_id);
+        $this->load->view('usermanager/normal_system/institution_amphur_page',$data, FALSE);
+    }
+    public function show_page_institution_district(){
+        $province_id = $this->input->post('province_id');
+        $institution_province_id = $this->input->post('institution_province_id');
+        $institution_amphur_id = $this->input->post('institution_amphur_id');
+        
+        $data['institution_district'] = $this->m_normal_system->getDataInstitutionDistrict($province_id, $institution_province_id, $institution_amphur_id);
+        $this->load->view('usermanager/normal_system/institution_district_page',$data, FALSE);
+    }
+}

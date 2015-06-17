@@ -1,0 +1,22 @@
+<table id="mytable" class="table table-bordred table-striped">
+                <thead>
+                <th>&nbsp;</th>
+                <th>วันที่</th>
+                <!--<th>ผู้ส่ง</th>-->
+                <th>ถึง</th>
+                <!--<th>หมายเหตุ</th>-->
+                </thead>
+                <tbody>
+                  <?php foreach($result as $row){?>
+                    <tr>
+                        <td>
+                            <a target="_blank" href = "uploads/registration_create_file/<?php echo $row['file_upload_name'];?>" class = "btn btn-success btn-sm"><i class = "glyphicon glyphicon-eye-open"></i>&nbsp;เปิดเอกสาร</a>
+                        </td>
+                        <td><?php echo $row['created'];?></td>
+                        <!--<td>1111</td>-->
+                        <td><?php echo $this->institution_name; ?></td>
+                        <!--<td></td>-->
+                    </tr>
+                   <?php }?>
+                </tbody>
+            </table>

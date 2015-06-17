@@ -1,0 +1,117 @@
+<hr/>
+<div style = "margin-left:15px; margin-right:15px">
+    <div style = "width :100% ; background-color: #3e8f3e; padding-left :15px ;color:#FFFFFF"><h2><img src = "assets/img/Custom-Icon-Design-Pretty-Office-9-Email-send.ico" width = "40px">&nbsp;&nbsp;<b>พิมพ์รายงานสมุดทะเบียนรับ</b></h2></div>
+    &nbsp;&nbsp;<a href = "index.php/report/book_receive/bookReceive" class = "btn btn-success btn-lg">สมุดทะเบียนรับ</a>
+    &nbsp;&nbsp;<a href = "index.php/report/book_receive/bookSend" class = "btn btn-success btn-lg">สมุดทะเบียนส่ง</a>
+    &nbsp;&nbsp;<a href = "index.php/report/book_receive/printReport" class = "btn btn-success btn-lg">พิมพ์รายงานสถิติ</a>
+    <br/><br/>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="panel-body form-horizontal payment-form">
+            <div class="form-group">
+                <label for="status" class="col-sm-2 control-label">สถานะ :</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="status" name="status">
+                        <option>2557</option>
+                        <option>2556</option>
+                        <option>2555</option>
+                        <option>2554</option>
+                        <option>2553</option>
+                    </select>
+                </div>
+            </div> 
+            <div class="form-group">
+                <label  class="col-sm-12 text-left "><h4><u><font color="red">พิมพ์รายงานจากเงื่อนไข</font></h4></u></label>
+            </div>
+            <div class="form-group">
+                <label for="status" class="col-sm-2 control-label">เลขทะเบียน :</label>
+                <div class="col-sm-4">
+                    <input type="text" class="col-sm-4 form-control" placeholder="เลขทะเบียน">
+                </div>
+                <label for="status" class="col-sm-2 control-label">ถึงเลขทะเบียน :</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" placeholder="ถึงเลขทะเบียน">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="status" class="col-sm-2 control-label">เลขทะเบียน :</label>
+                <div class="col-sm-2">
+                    <input type="text"  class="form-control" placeholder="เลขทะเบียนที่1">
+                </div>
+                <div class="col-sm-2">
+                    <input type="text"  class="form-control" placeholder="เลขทะเบียนที่2">
+                </div>
+                <div class="col-sm-2">
+                    <input type="text"   class="form-control" placeholder="เลขทะเบียนที่3">
+                </div>
+                <div class="col-sm-2">
+                    <input type="text"  class="form-control" placeholder="เลขทะเบียนที่4">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2">
+                    
+                </div>
+                <div class="col-sm-2">
+                    <input type="text"  class="form-control" placeholder="เลขทะเบียนที่5">
+                </div>
+                <div class="col-sm-2">
+                    <input type="text"  class="form-control" placeholder="เลขทะเบียนที่6">
+                </div>
+                <div class="col-sm-2">
+                    <input type="text"   class="form-control" placeholder="เลขทะเบียนที่7">
+                </div>
+                <div class="col-sm-2">
+                    <input type="text"  class="form-control" placeholder="เลขทะเบียนที่8">
+                </div>
+                
+            </div>
+            <div class="form-group">
+                <label for="status" class="col-sm-2 control-label">เอกสารที่ :</label>
+                <div class="col-sm-4">
+                    <input type="text"    class="form-control" placeholder="เอกสารที่">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="status" class="col-sm-2 control-label">วันที่ :</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control"  id="datepicker" placeholder="วันที่เริ่ม">
+                </div>
+                <label for="status" class="col-sm-2 control-label">ถึงวันที่ :</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control"  id="datepicker2" placeholder="วันที่สิ้นสุด">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="status" class="col-sm-2 control-label">จาก/ผู้ส่ง :</label>
+                <div class="col-sm-4">
+                   <input type="text"    class="form-control" placeholder="จาก/ผู้ส่ง">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="status" class="col-sm-2 control-label">เรื่อง :</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" placeholder="เรื่อง">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="status" class="col-sm-2 control-label">เรียน :</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" placeholder="เรียน">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12 text-right">
+                    <button class="btn btn-success">ตกลง</button>
+                    <button class="btn btn-danger">ยกเลิก</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+    

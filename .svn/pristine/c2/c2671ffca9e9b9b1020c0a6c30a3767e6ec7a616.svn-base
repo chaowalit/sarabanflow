@@ -1,0 +1,6 @@
+
+$(document).ready(function(){
+    $("#province_id").change(function(){
+        alert('kkk');
+    });
+});

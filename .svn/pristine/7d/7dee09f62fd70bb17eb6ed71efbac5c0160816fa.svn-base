@@ -1,0 +1,69 @@
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+require_once APPPATH . 'libraries/nm_saraban_lib.php';
+
+class book_receive extends nm_saraban_lib {
+    function __construct() {
+        parent::__construct();
+        $this->load->model('m_printreport');
+    }
+    public function index() {
+        $this->load->view('include/header');
+        $this->load->view('bookreceive/book_receive');
+        $this->load->view('include/footer');
+    }
+
+    public function bookReceive() {
+        $this->load->view('include/header');
+        $this->load->view('bookreceive/book_receive');
+        $this->load->view('include/footer');
+    }
+
+    public function bookSend() {
+        $this->load->view('include/header');
+        $this->load->view('bookreceive/book_send');
+        $this->load->view('include/footer');
+    }
+
+    public function printReport() {
+        $this->load->view('include/header');
+        $this->load->view('bookreceive/print_report');
+        $this->load->view('include/footer');
+    }
+
+    public function confirmBookReceive(){
+        
+    }
+    public function toDocReceive() {
+        $data['member'] = $this->m_printreport->alldata();
+        $this->load->view('bookreceive/book_receive_print_report',$data);
+        //$this->index();
+    }
+    
+    
+    public function confirmBookSend(){
+        $from_number_of_run = $this->input->post('from_number_of_run');
+        $to_number_of_run   = $this->input->post('to_number_of_run');
+        $this->input->post('');
+        $this->input->post('');
+        $this->input->post('');
+        $this->input->post('');
+        $this->input->post('');
+        $this->input->post('');
+        $this->input->post('');
+        
+        $this->load->view('include/header');
+        $this->load->view('bookreceive/confirm_book_send');
+        $this->load->view('include/footer');
+    }
+    public function toDocSend(){
+        $data['member'] = $this->m_printreport->alldata();
+        $this->load->view('bookreceive/book_send_print_report',$data);
+    }
+
+}
+
+/* End of file welcome.php */
+/* Location: ./application/controllers/welcome.php */

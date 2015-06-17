@@ -1,0 +1,16 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class auth_login extends CI_Controller {
+    //put your code here
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('m_login');
+    }
+        
+    public function index()
+    {  
+        
+        $this->load->view('login');
+    }
+}

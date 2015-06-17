@@ -1,0 +1,113 @@
+<hr/>
+<div style = "margin-left:15px; margin-right:15px">
+    <div style = "width :100% ; background-color: #3e8f3e; padding-left :15px ;color:#FFFFFF"><h2><img src = "assets/img/Custom-Icon-Design-Pretty-Office-9-Email-send.ico" width = "40px">&nbsp;&nbsp;<b>ค้นหาสมุดทะเบียนส่ง</b></h2>
+    </div>
+    &nbsp;&nbsp;<a href = "index.php/searchreport/searchreport/recieve_report" class = "btn btn-success btn-lg">สมุดทะเบียนรับ</a>
+    &nbsp;&nbsp;<a href = "index.php/searchreport/searchreport/send_report" class = "btn btn-success btn-lg">สมุดทะเบียนส่ง</a>
+    <br/><br/>
+    <center>
+        <form role="form">
+            <table border = "0" >
+                <tr colspan = "4">	
+                    <td width = "170px"><b>ระบบฐานข้อมูล ปี พ.ศ.</b></td>
+                    <td colspan = "4">
+                        <select class="form-control" style = "width :80px!important;">
+                            <option>2557</option>
+                            <option>2556</option>
+                            <option>2555</option>
+                            <option>2554</option>
+                            <option>2553</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>	
+                    <td colspan = "5"><u><b>ค้นหาจากเงื่อนไข</b></u></td>
+                </tr>
+                <tr>	
+                    <td><b>เลขทะเบียน</b></td>
+                    <td>
+                        <input type="text" class="form-control" placeholder="เลขทะเบียน">
+                    </td>
+                    <td><center>&nbsp;&nbsp;<font>ถึงเลขทะเบียน</font>&nbsp;&nbsp;<center></td>
+                        <td colspan = "2">
+                            <input type="text" class="form-control" placeholder="ถึงเลขทะเบียน">
+                        </td>
+                        </tr>
+                        <tr >	
+                            <td><b>ระบุเลขทะเบียน</b></td>
+                            <td>
+                                <input type="text"  class="form-control" placeholder="เลขทะเบียนที่1">
+                            </td>
+                            <td>
+                                <input type="text"  class="form-control" placeholder="เลขทะเบียนที่2">
+                            </td>
+                            <td>
+                                <input type="text"   class="form-control" placeholder="เลขทะเบียนที่3">
+                            </td>
+                            <td>
+                                <input type="text"  class="form-control" placeholder="เลขทะเบียนที่4">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b></b></td>
+                            <td>
+                                <input type="text"   class="form-control" placeholder="เลขทะเบียนที่5">
+                            </td>
+                            <td>
+                                <input type="text"   class="form-control" placeholder="เลขทะเบียนที่6">
+                            </td>
+                            <td>
+                                <input type="text"   class="form-control" placeholder="เลขทะเบียนที่7">
+                            </td>
+                            <td>
+                                <input type="text"   class="form-control" placeholder="เลขทะเบียนที่8">
+                            </td>
+                        <tr/>
+                        <tr>
+                            <td><b>เอกสารที่</b></td>
+                            <td colspan = "4">
+                                <input type="text"   style = "width : 330px" class="form-control" placeholder="เอกสารที่">
+                            </td>
+                        <tr/>
+                        <tr>
+                            <td><b>วันที่</b></td>
+                            <td>
+                                <input type="text" class="form-control"  id="datepicker" placeholder="วันที่เริ่ม">
+                            </td>
+                            <td>
+                        <center>&nbsp;&nbsp;<font>ถึงวันที่</font>&nbsp;&nbsp;<center>
+                                </td>
+                                <td >
+                                    <input type="text" class="form-control"  id="datepicker2" placeholder="วันที่สิ้นสุด"></p>
+                                </td>
+                                <tr/>
+                                <tr>
+                                    <td><b>จาก/ผู้ส่ง</b></td>
+                                    <td colspan = "4">
+                                        <input type="text"   style = "width : 330px" class="form-control" placeholder="จาก/ผู้ส่ง">
+                                    </td>
+                                <tr/>
+                                <tr>
+                                    <td><b>เรื่อง</b></td>
+                                    <td colspan = "6">
+                                        <input type="text" class="form-control" placeholder="เรื่อง">
+                                    </td>
+                                <tr/>
+                                <tr>
+                                    <td><b>เรียน</b></td>
+                                    <td colspan = "6">
+                                        <input type="text" class="form-control" placeholder="เรียน">
+                                    </td>
+                                <tr/>
+                                <tr>
+                                    <td colspan = "6" align = "center">
+                                        <br/>
+                                        <input type = "submit" class = "btn btn-success" value = "ค้นหา"/>&nbsp;&nbsp;<input type = "submit" class = "btn btn-danger"  value = "ยกเลิก"/>
+                                    </td>	
+                                <tr/>
+                                </table>  
+                                </form>
+                            </center>
+
+
+                            </div>
