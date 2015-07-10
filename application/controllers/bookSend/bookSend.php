@@ -442,7 +442,7 @@ class bookSend extends nm_saraban_lib {
 
     public function edit($id = '') {
         $data['result'] = $this->m_booksend->getDetail($id);
-         $data['attach_file'] = $this->m_booksend->get_attach_file($id);
+        $data['attach_file'] = $this->m_booksend->get_attach_file($id);
         //$data['id_send'] = $id;
         $this->load->view('include/header');
         $this->load->view('bookSend/show_edit_detail_bookSend', $data);
@@ -452,7 +452,7 @@ class bookSend extends nm_saraban_lib {
     public function update_registration_create_number(){
         if($this->input->post('registration_create_number_id')){
             $data = array(
-                "dated_send" => $this->input->post('dated_send'),
+                "dated_send" => date("Y-m-d", strtotime($this->input->post('dated_send'))),
                 "subject" => $this->input->post('subject'),
                 "to_receive" => $this->input->post('to_receive'),
                 "attach_detail" => $this->input->post('attach_detail'),

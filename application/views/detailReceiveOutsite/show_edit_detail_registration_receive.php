@@ -61,7 +61,7 @@
                     <label>เอกสารเลขที่</label>
                 </div>
                 <div class="col-xs-9 col-sm-10 " style="background-color: #E6E6E6;">
-                    <input id="" name="" type="text" class="form-control"  placeholder="เอกสารเลขที่" value="<?php echo $result[0]['document_no'];  ?>" readonly="true" style="width:50%;">
+                    <input id="" name="document_no" type="text" class="form-control"  placeholder="เอกสารเลขที่" value="<?php echo $result[0]['document_no'];  ?>" readonly="true" style="width:50%;">
                 </div>
             </div>
         </div>

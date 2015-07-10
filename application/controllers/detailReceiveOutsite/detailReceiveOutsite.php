@@ -144,6 +144,10 @@ class detailReceiveOutsite extends nm_saraban_lib{
     public function delete($registration_receive_document_id, $registration_create_number_id){
         $this->db->where('id', $registration_receive_document_id);
         $this->db->delete('registration_receive_document');
+        
+        $this->db->where('registration_receive_document_id', $registration_receive_document_id);
+        $this->db->delete('registration_receive_document_of_run');
+        
         redirect('recieptBook/recieptBook', 'refresh');
     }
     
@@ -156,6 +160,7 @@ class detailReceiveOutsite extends nm_saraban_lib{
         $data['attach_file_old'] = $this->m_detailreceiveoutsite->get_attach_file_old($registration_create_number_id);
         $data['attach_file_new'] = $this->m_detailreceiveoutsite->get_attach_file_new($registration_receive_document_id);
         
+        //var_dump($data); exit;
         //$data['id_send'] = $id;
         $this->load->view('include/header');
         $this->load->view('detailReceiveOutsite/show_edit_detail_registration_receive', $data);
@@ -166,7 +171,7 @@ class detailReceiveOutsite extends nm_saraban_lib{
         if($this->input->post('registration_receive_document_id')){
             $data = array(
                 "document_no" => $this->input->post('document_no'),
-                "receive_date" => $this->input->post('receive_date'),
+                "receive_date" => date("Y-m-d", strtotime($this->input->post('receive_date'))),
                 "from" => $this->input->post('from'),
                 "subject" => $this->input->post('subject'),
                 "to_receive" => $this->input->post('to_receive'),
@@ -177,7 +182,7 @@ class detailReceiveOutsite extends nm_saraban_lib{
                 "objective_id" => $this->input->post('objective_id'),
                 "layer_priority_id" => $this->input->post('layer_priority_id'),
                 "layer_secret_id" => $this->input->post('layer_secret_id'),
-                "implementation_date" => $this->input->post('implementation_date'),
+                "implementation_date" => date("Y-m-d", strtotime($this->input->post('implementation_date'))),
                 "implementation_time" => $this->input->post('implementation_time')
             );
             
